@@ -11,128 +11,142 @@ const tips = [
   "Malas itu manusiawi, tapi ingat, kamu masih harus klik sesuatu di sini."
 ];
 
-// Get DOM elements
-const percentage = document.querySelector('.percentage');
-const loader = document.querySelector('.loader');
-const gradientBg = document.querySelector('.gradient-background');
-const tunnel = document.querySelector('.tunnel');
-const scene = document.querySelector('.scene');
-const stars = document.querySelector('.stars');
-const welcomeContent = document.querySelector('.welcome-content');
-const tipText = document.querySelector('.tip-text');
-const tipContainer = document.querySelector('.tip-container');
+// Get DOM elements with error handling
+const getElement = (selector) => {
+  const element = document.querySelector(selector);
+  if (!element) {
+      console.warn(`Element with selector "${selector}" not found`);
+  }
+  return element;
+};
+
+const elements = {
+  percentage: getElement('.percentage'),
+  loader: getElement('.loader'),
+  gradientBg: getElement('.gradient-background'),
+  tunnel: getElement('.tunnel'),
+  scene: getElement('.scene'),
+  stars: getElement('.stars'),
+  welcomeContent: getElement('.welcome-content'),
+  tipText: getElement('.tip-text'),
+  tipContainer: getElement('.tip-container'),
+  scheduleContainer: getElement('.schedule-container'),
+  infoText: getElement('.info-text'),
+  countdownEl: getElement('.countdown'),
+  finalButtons: getElement('.final-buttons'),
+  scheduleBtn: getElement('.schedule-btn'),
+  backBtn: getElement('.back-btn'),
+  learnButton: getElement('.learn-button')
+};
 
 let progress = 0;
+let tipInterval;
+let countdownInterval;
 
 // Display random tip with animation
 function updateTip() {
+  if (!elements.tipText) return;
   const randomTip = tips[Math.floor(Math.random() * tips.length)];
-  tipText.classList.remove('changing');
-  void tipText.offsetWidth; // Trigger reflow
-  tipText.classList.add('changing');
-  tipText.textContent = randomTip;
+  elements.tipText.classList.remove('changing');
+  void elements.tipText.offsetWidth; // Trigger reflow
+  elements.tipText.classList.add('changing');
+  elements.tipText.textContent = randomTip;
 }
 
 // Initial tip
 updateTip();
 
 // Change tip every 3 seconds
-const tipInterval = setInterval(updateTip, 3000);
+tipInterval = setInterval(updateTip, 3000);
 
 // Progress animation
 const updateProgress = setInterval(() => {
   progress += 1;
-  percentage.textContent = `${progress}%`;
+  if (elements.percentage) {
+      elements.percentage.textContent = `${progress}%`;
+  }
   
   if (progress >= 100) {
-    clearInterval(updateProgress);
-    clearInterval(tipInterval);
-    startAnimation();
+      clearInterval(updateProgress);
+      clearInterval(tipInterval);
+      startAnimation();
   }
 }, 20);
 
 function startAnimation() {
   setTimeout(() => {
-    percentage.classList.add('fade');
-    loader.classList.add('complete');
-    tunnel.classList.add('active');
-    scene.classList.add('active');
-    stars.classList.add('active');
-    tipContainer.classList.add('fade');
-    
-    setTimeout(() => {
-      gradientBg.classList.add('visible');
+      elements.percentage?.classList.add('fade');
+      elements.loader?.classList.add('complete');
+      elements.tunnel?.classList.add('active');
+      elements.scene?.classList.add('active');
+      elements.stars?.classList.add('active');
+      elements.tipContainer?.classList.add('fade');
+      
       setTimeout(() => {
-        welcomeContent.classList.add('visible');
-      }, 500);
-    }, 2000);
+          elements.gradientBg?.classList.add('visible');
+          setTimeout(() => {
+              elements.welcomeContent?.classList.add('visible');
+          }, 500);
+      }, 2000);
   }, 500);
 }
 
-// Learn button click handler
-document.querySelector('.learn-button').addEventListener('click', () => {
-  welcomeContent.classList.add('hide');
+function startCountdown() {
+  let countdown = 5;
   
-  const scheduleContainer = document.querySelector('.schedule-container');
-  const infoText = document.querySelector('.info-text');
-  scheduleContainer.classList.add('visible');
+  if (!elements.countdownEl) return;
+  
+  countdownInterval = setInterval(() => {
+      countdown--;
+      elements.countdownEl.textContent = countdown;
+      
+      if (countdown <= 0) {
+          clearInterval(countdownInterval);
+          showFinalView();
+      }
+  }, 1000);
+}
+
+function showFinalView() {
+  elements.scheduleContainer?.classList.remove('visible');
   
   setTimeout(() => {
-    infoText.classList.add('show');
+      document.body.style.background = 'linear-gradient(135deg, #3498db 0%, #2c3e50 100%)';
+      elements.finalButtons?.classList.add('visible');
+      elements.scheduleBtn?.classList.add('visible');
+  }, 500);
+}
+
+// Event Listeners
+elements.learnButton?.addEventListener('click', () => {
+  elements.welcomeContent?.classList.add('hide');
+  elements.scheduleContainer?.classList.add('visible');
+  
+  setTimeout(() => {
+      elements.infoText?.classList.add('show');
   }, 1000);
   
   startCountdown();
 });
 
-function startCountdown() {
-  let countdown = 5;
-  const countdownEl = document.querySelector('.countdown');
+elements.scheduleBtn?.addEventListener('click', () => {
+  elements.finalButtons?.classList.remove('visible');
+  elements.scheduleBtn?.classList.remove('visible');
   
-  const countdownInterval = setInterval(() => {
-    countdown--;
-    countdownEl.textContent = countdown;
-    
-    if (countdown <= 0) {
-      clearInterval(countdownInterval);
-      showFinalView();
-    }
-  }, 1000);
-}
-
-function showFinalView() {
-  const scheduleContainer = document.querySelector('.schedule-container');
-  scheduleContainer.classList.remove('visible');
-  
-  setTimeout(() => {
-    document.body.style.background = 'linear-gradient(135deg, #3498db 0%, #2c3e50 100%)';
-    const finalButtons = document.querySelector('.final-buttons');
-    finalButtons.classList.add('visible');
-    document.querySelector('.schedule-btn').classList.add('visible');
-  }, 500);
-}
-
-// Navigation button handlers
-document.querySelector('.schedule-btn').addEventListener('click', () => {
-  document.querySelector('.final-buttons').classList.remove('visible');
-  document.querySelector('.schedule-btn').classList.remove('visible');
-  
-  document.querySelector('.schedule-container').classList.add('visible');
-  document.querySelector('.back-btn').classList.add('visible');
+  elements.scheduleContainer?.classList.add('visible');
+  elements.backBtn?.classList.add('visible');
 });
 
-document.querySelector('.back-btn').addEventListener('click', () => {
-  document.querySelector('.schedule-container').classList.remove('visible');
-  document.querySelector('.back-btn').classList.remove('visible');
+elements.backBtn?.addEventListener('click', () => {
+  elements.scheduleContainer?.classList.remove('visible');
+  elements.backBtn?.classList.remove('visible');
   
-  document.querySelector('.final-buttons').classList.add('visible');
-  document.querySelector('.schedule-btn').classList.add('visible');
+  elements.finalButtons?.classList.add('visible');
+  elements.scheduleBtn?.classList.add('visible');
 });
 
-// Button click handlers
-document.querySelector('.final-button').addEventListener('click', () => {
-  window.location.href = 'https://summerymaybe.my.canva.site/';
-});
-
-document.querySelector('.see-more').addEventListener('click', () => {
-  alert('Ntar blm ada');
+// Clean up on page unload
+window.addEventListener('unload', () => {
+  clearInterval(tipInterval);
+  clearInterval(countdownInterval);
 });
