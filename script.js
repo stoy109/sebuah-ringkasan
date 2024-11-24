@@ -111,7 +111,8 @@ function showFinalView() {
   elements.scheduleContainer?.classList.remove('visible');
   
   setTimeout(() => {
-      document.body.style.background = 'linear-gradient(135deg, #3498db 0%, #2c3e50 100%)';
+      // Add class to body instead of directly setting style
+      document.body.classList.add('final-view');
       elements.finalButtons?.classList.add('visible');
       elements.scheduleBtn?.classList.add('visible');
   }, 500);
