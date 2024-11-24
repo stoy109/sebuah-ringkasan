@@ -151,9 +151,9 @@ elements.backBtn?.addEventListener('click', () => {
 
 // Add navigation for "See Summary" button and "See more" span
 elements.finalButton?.addEventListener('click', () => {
-  window.location.href = './Main-materi/mainmateri.html';
+  window.location.href = 'https://stoy109.github.io/sebuah-ringkasan/Main-materi/mainmateri.html';
 });
 
 elements.seeMore?.addEventListener('click', () => {
-  window.location.href = './Main-materi/mainmateri.html';
+  window.location.href = 'https://stoy109.github.io/sebuah-ringkasan/Main-materi/mainmateri.html';
 });
