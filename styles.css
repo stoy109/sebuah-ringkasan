@@ -8,6 +8,7 @@ body {
     min-height: 100vh;
     perspective: 1000px;
     font-family: Arial, sans-serif;
+    -webkit-overflow-scrolling: touch;
 }
 
 .container {
@@ -26,8 +27,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
+    -webkit-perspective: 1000px;
     perspective: 1000px;
+    z-index: 3;
 }
 
 .tunnel {
@@ -40,6 +44,11 @@ body {
     opacity: 0;
     transform: translateZ(0px) scale(2);
     pointer-events: none;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
 }
 
 .tunnel.active {
@@ -52,6 +61,7 @@ body {
     height: 100vh;
     transform-style: preserve-3d;
     perspective: 1000px;
+    overflow: hidden;
 }
 
 .scene.active {
@@ -63,13 +73,16 @@ body {
     width: min(200px, 50vw);
     height: min(200px, 50vw);
     z-index: 2;
-  }
+}
 
 .spinner {
     position: absolute;
     width: 100%;
     height: 100%;
     animation: rotate 2s linear infinite;
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .loader.complete .spinner {
@@ -85,8 +98,8 @@ body {
     stroke: url(#gradient);
     transform: rotate(-90deg);
     transform-origin: center;
-    stroke-dasharray: 565.48;
-    stroke-dashoffset: 565.48;
+    stroke-dasharray: 565.487;
+    stroke-dashoffset: 565.487;
     animation: dash 2s ease-in-out forwards;
 }
 
@@ -123,6 +136,9 @@ body {
     background-size: 200px 200px;
     opacity: 0;
     transform: translateZ(0);
+    z-index: 2;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .stars.active {
@@ -156,6 +172,10 @@ body {
     opacity: 0;
     z-index: 3;
     visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
 }
 
 .welcome-content.visible {
@@ -238,6 +258,12 @@ body {
     z-index: 4;
     width: min(90vw, 600px);
     padding: 20px;
+    /* Add max-height to prevent overflow */
+    max-height: 90vh;
+    overflow-y: auto; /* Allow scrolling if content is too tall */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .schedule-container.visible {
@@ -254,11 +280,14 @@ body {
 }
 
 .schedule-image {
-    width: 100%;
-    max-width: 400px;
+    width: auto; /* Changed from 100% */
+    max-width: 400px; /* Keep this */
     height: auto;
+    max-height: 50vh; /* Add this to limit height */
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 255, 247, 0.3);
+    object-fit: contain; /* Maintain aspect ratio */
+    margin-bottom: 20px; /* Add space below image */
 }
 
 .countdown {
@@ -288,7 +317,8 @@ body {
 .final-buttons.visible {
     opacity: 1;
     visibility: visible;
-    transition: opacity 0.5s ease;
+    transform: translate(-50%, -50%) scale(1);
+    transition: all 0.5s ease;
 }
 
 .final-button {
@@ -368,6 +398,7 @@ body {
     opacity: 0;
     visibility: hidden;
     backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
 
 .nav-button.visible {
@@ -449,7 +480,7 @@ body {
 
 @keyframes dash {
     0% {
-        stroke-dashoffset: 565.48;
+        stroke-dashoffset: 565.487;
     }
     100% {
         stroke-dashoffset: 0;
@@ -518,79 +549,160 @@ body {
 /* Mobile-specific adjustments */
 @media (max-width: 768px) {
     .nav-button {
-    padding: 8px 12px;
+        padding: 8px 12px;
     }
   
     .schedule-btn {
-      top: 10px;
-      left: 10px;
+        top: 10px;
+        left: 10px;
     }
   
     .back-btn {
-      top: 10px;
-      right: 10px;
+        top: 10px;
+        right: 10px;
     }
   
     .tip-container {
-      bottom: 10px;
+        bottom: 10px;
     }
   
     .welcome-content {
-      width: 90%;
-      text-align: center;
+        width: 90%;
+        text-align: center;
     }
   
     .schedule-container {
-      padding: 15px;
+        padding: 15px;
     }
   
     .final-buttons {
-      width: 85%;
+        width: 85%;
     }
-  }
+}
   
-  /* Landscape mode adjustments */
-  @media (max-height: 500px) and (orientation: landscape) {
+/* Landscape mode adjustments */
+@media (max-height: 500px) and (orientation: landscape) {
     .loader {
-      width: min(150px, 30vh);
-      height: min(150px, 30vh);
+        width: min(150px, 30vh);
+        height: min(150px, 30vh);
     }
   
     .welcome-text {
-      font-size: clamp(1.5rem, 4vh, 2rem);
-      margin-bottom: 1rem;
+        font-size: clamp(1.5rem, 4vh, 2rem);
+        margin-bottom: 1rem;
     }
   
     .schedule-container {
-      padding: 10px;
+        padding: 10px;
     }
   
     .schedule-image {
-      max-height: 70vh;
-      width: auto;
+        max-height: 70vh;
+        width: auto;
     }
   
     .tip-container {
-      bottom: 5px;
+        bottom: 5px;
     }
-  }
+}
   
-  /* High-resolution screens */
-  @media (min-width: 1400px) {
+/* High-resolution screens */
+@media (min-width: 1400px) {
     .welcome-text {
-      font-size: 3.5rem;
+        font-size: 3.5rem;
     }
   
     .learn-button {
-      padding: 20px 40px;
-      font-size: 1.4rem;
+        padding: 20px 40px;
+        font-size: 1.4rem;
     }
   
     .schedule-container {
-      max-width: 800px;
+        max-width: 800px;
     }
   
     .schedule-image {
-      max-width: 600px;
+        max-width: 600px;
     }
-  }
+  
+    .tip-container {
+        font-size: 1.1rem;
+    }
+  
+    .final-buttons {
+        width: 400px;
+    }
+  
+    .final-button {
+        font-size: 1.3rem;
+        padding: 18px 36px;
+    }
+}
+
+/* Print styles */
+@media print {
+    body {
+        background: white;
+    }
+  
+    .gradient-background,
+    .stars,
+    .tunnel-wrapper,
+    .nav-button {
+        display: none;
+    }
+  
+    .welcome-text,
+    .schedule-title,
+    .tip-text {
+        color: black;
+        text-shadow: none;
+    }
+  
+    .schedule-image {
+        box-shadow: none;
+    }
+}
+
+/* Prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+  
+    .tunnel,
+    .stars,
+    .gradient-background {
+        animation: none !important;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .final-button:hover {
+        background: rgba(255, 255, 255, 0.9);
+        color: #1a1a1a;
+    }
+  
+    .nav-button {
+        background: rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* High contrast mode */
+@media (forced-colors: active) {
+    .final-button,
+    .nav-button,
+    .learn-button {
+        border: 2px solid currentColor;
+    }
+  
+    .gradient-background {
+        background: none;
+    }
+}
