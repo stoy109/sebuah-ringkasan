@@ -1,12 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-    margin: 0;
-    overflow: hidden;
-    background: #1a1a1a;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    perspective: 1000px;
+  margin: 0;
+  overflow: hidden;
+  background: #1a1a1a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  perspective: 1000px;
+  font-family: Arial, sans-serif;
 }
 
 .container {
@@ -59,10 +66,10 @@ body {
 
 .loader {
     position: relative;
-    width: 200px;
-    height: 200px;
+    width: min(200px, 50vw);
+    height: min(200px, 50vw);
     z-index: 2;
-}
+  }
 
 .spinner {
     position: absolute;
@@ -164,15 +171,16 @@ body {
 
 .welcome-text {
     font-family: Arial, sans-serif;
-    font-size: 3rem;
+    font-size: clamp(2rem, 5vw, 3rem);
     color: white;
     margin-bottom: 2rem;
     text-shadow: 0 0 10px rgba(0, 255, 247, 0.5);
+    text-align: center;
 }
 
 .learn-button {
-    padding: 15px 30px;
-    font-size: 1.2rem;
+    padding: clamp(10px, 3vw, 15px) clamp(20px, 5vw, 30px);
+    font-size: clamp(1rem, 3vw, 1.2rem);
     background: linear-gradient(45deg, #00fff7, #ff00ff);
     border: none;
     border-radius: 25px;
@@ -188,17 +196,16 @@ body {
 }
 
 .tip-container {
-    position: fixed;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: white;
-    font-family: Arial, sans-serif;
-    font-size: 1rem;
-    opacity: 1;
-    text-align: center;
-    max-width: 80%;
-    transition: opacity 0.5s ease-out;
+  position: fixed;
+  bottom: clamp(20px, 5vh, 40px);
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  opacity: 1;
+  text-align: center;
+  width: min(90%, 600px);
+  transition: opacity 0.5s ease-out;
 }
 
 .tip-container.fade {
@@ -227,19 +234,16 @@ body {
 }
 
 .schedule-container {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    opacity: 0;
-    visibility: hidden;
-    z-index: 15;
-    background: rgba(26, 26, 26, 0.95);
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10px);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 4;
+  width: min(90vw, 600px);
+  padding: 30px;
 }
 
 .schedule-container.visible {
@@ -249,16 +253,18 @@ body {
 }
 
 .schedule-title {
-    color: white;
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    font-weight: bold;
+  color: white;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  margin-bottom: 20px;
+  font-weight: bold;
 }
 
 .schedule-image {
-    max-width: 400px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 255, 247, 0.3);
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 255, 247, 0.3);
 }
 
 .countdown {
@@ -271,17 +277,18 @@ body {
 }
 
 .final-buttons {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-    opacity: 0;
-    visibility: hidden;
-    z-index: 5;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 5;
+  width: min(90%, 300px);
 }
 
 .final-buttons.visible {
@@ -291,16 +298,17 @@ body {
 }
 
 .final-button {
-    padding: 15px 30px;
-    font-size: 1.2rem;
-    background: none;
-    border: 2px solid white;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
+  width: 100%;
+  padding: clamp(12px, 3vw, 15px) clamp(20px, 5vw, 30px);
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  background: none;
+  border: 2px solid white;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .final-button:hover {
@@ -334,19 +342,18 @@ body {
 }
 
 .info-text {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: white;
-    font-size: 14px;
-    opacity: 0;
-    text-align: center;
-    z-index: 11;
-    width: 100%;
-    max-width: 600px;
-    padding: 10px;
-    font-style: italic;
+  position: fixed;
+  bottom: clamp(10px, 3vh, 20px);
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+  opacity: 0;
+  text-align: center;
+  z-index: 11;
+  width: min(90%, 600px);
+  padding: 10px;
+  font-style: italic;
 }
 
 .info-text.show {
@@ -354,19 +361,19 @@ body {
 }
 
 .nav-button {
-    position: fixed;
-    padding: 8px 12px;
-    font-size: 0.9rem;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: rgba(255, 255, 255, 0.8);
-    border-radius: 20px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: 20;
-    opacity: 0;
-    visibility: hidden;
-    backdrop-filter: blur(5px);
+  position: fixed;
+  padding: clamp(6px, 2vw, 8px) clamp(10px, 3vw, 12px);
+  font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 20;
+  opacity: 0;
+  visibility: hidden;
+  backdrop-filter: blur(5px);
 }
 
 .nav-button.visible {
@@ -513,3 +520,83 @@ body {
         transform: translate(-50%, 0);
     }
 }
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+    .nav-button {
+      padding: 8px 12px;
+    }
+  
+    .schedule-btn {
+      top: 10px;
+      left: 10px;
+    }
+  
+    .back-btn {
+      top: 10px;
+      right: 10px;
+    }
+  
+    .tip-container {
+      bottom: 10px;
+    }
+  
+    .welcome-content {
+      width: 90%;
+      text-align: center;
+    }
+  
+    .schedule-container {
+      padding: 15px;
+    }
+  
+    .final-buttons {
+      width: 85%;
+    }
+  }
+  
+  /* Landscape mode adjustments */
+  @media (max-height: 500px) and (orientation: landscape) {
+    .loader {
+      width: min(150px, 30vh);
+      height: min(150px, 30vh);
+    }
+  
+    .welcome-text {
+      font-size: clamp(1.5rem, 4vh, 2rem);
+      margin-bottom: 1rem;
+    }
+  
+    .schedule-container {
+      padding: 10px;
+    }
+  
+    .schedule-image {
+      max-height: 70vh;
+      width: auto;
+    }
+  
+    .tip-container {
+      bottom: 5px;
+    }
+  }
+  
+  /* High-resolution screens */
+  @media (min-width: 1400px) {
+    .welcome-text {
+      font-size: 3.5rem;
+    }
+  
+    .learn-button {
+      padding: 20px 40px;
+      font-size: 1.4rem;
+    }
+  
+    .schedule-container {
+      max-width: 800px;
+    }
+  
+    .schedule-image {
+      max-width: 600px;
+    }
+  }
