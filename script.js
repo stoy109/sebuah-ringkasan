@@ -36,7 +36,9 @@ const elements = {
   finalButtons: getElement('.final-buttons'),
   scheduleBtn: getElement('.schedule-btn'),
   backBtn: getElement('.back-btn'),
-  learnButton: getElement('.learn-button')
+  learnButton: getElement('.learn-button'),
+  finalButton: getElement('.final-button'),
+  seeMore: getElement('.see-more')
 };
 
 let progress = 0;
@@ -111,7 +113,6 @@ function showFinalView() {
   elements.scheduleContainer?.classList.remove('visible');
   
   setTimeout(() => {
-      // Add class to body instead of directly setting style
       document.body.classList.add('final-view');
       elements.finalButtons?.classList.add('visible');
       elements.scheduleBtn?.classList.add('visible');
@@ -142,12 +143,17 @@ elements.backBtn?.addEventListener('click', () => {
   elements.scheduleContainer?.classList.remove('visible');
   elements.backBtn?.classList.remove('visible');
   
-  elements.finalButtons?.classList.add('visible');
-  elements.scheduleBtn?.classList.add('visible');
+  setTimeout(() => {
+      elements.finalButtons?.classList.add('visible');
+      elements.scheduleBtn?.classList.add('visible');
+  }, 500);
 });
 
-// Clean up on page unload
-window.addEventListener('unload', () => {
-  clearInterval(tipInterval);
-  clearInterval(countdownInterval);
+// Add navigation for "See Summary" button and "See more" span
+elements.finalButton?.addEventListener('click', () => {
+  window.location.href = './Main-materi/mainmateri.html';
+});
+
+elements.seeMore?.addEventListener('click', () => {
+  window.location.href = './Main-materi/mainmateri.html';
 });
