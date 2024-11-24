@@ -1,3 +1,4 @@
+/* Global Resets */
 * {
   margin: 0;
   padding: 0;
@@ -16,185 +17,186 @@ body {
   font-family: Arial, sans-serif;
 }
 
+/* Container Styles */
 .container {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+/* Tunnel Animation Styles */
 .tunnel-wrapper {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transform-style: preserve-3d;
-    perspective: 1000px;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d;
+  perspective: 1000px;
 }
 
 .tunnel {
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    background: 
-        repeating-radial-gradient(circle at center, transparent 0, #1a1a1a 10px, transparent 20px, #1a1a1a 30px),
-        repeating-radial-gradient(circle at center, rgba(0, 255, 247, 0.1) 0, rgba(255, 0, 255, 0.1) 40px, rgba(0, 255, 247, 0.1) 80px);
-    opacity: 0;
-    transform: translateZ(0px) scale(2);
-    pointer-events: none;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: repeating-radial-gradient(circle at center, transparent 0, #1a1a1a 10px, transparent 20px, #1a1a1a 30px), repeating-radial-gradient(circle at center, rgba(0, 255, 247, 0.1) 0, rgba(255, 0, 255, 0.1) 40px, rgba(0, 255, 247, 0.1) 80px);
+  opacity: 0;
+  transform: translateZ(0px) scale(2);
+  pointer-events: none;
 }
 
 .tunnel.active {
-    animation: tunnelTravel 2s ease-in forwards;
+  animation: tunnelTravel 2s ease-in forwards;
 }
 
+/* Scene Styles */
 .scene {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    transform-style: preserve-3d;
-    perspective: 1000px;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  transform-style: preserve-3d;
+  perspective: 1000px;
 }
 
 .scene.active {
-    animation: sceneZoom 2s ease-in forwards;
+  animation: sceneZoom 2s ease-in forwards;
 }
 
+/* Loader Styles */
 .loader {
-    position: relative;
-    width: min(200px, 50vw);
-    height: min(200px, 50vw);
-    z-index: 2;
-  }
+  position: relative;
+  width: min(200px, 50vw);
+  height: min(200px, 50vw);
+  z-index: 2;
+}
 
 .spinner {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    animation: rotate 2s linear infinite;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  animation: rotate 2s linear infinite;
 }
 
 .loader.complete .spinner {
-    animation: completeLoader 1s ease-in forwards;
+  animation: completeLoader 1s ease-in forwards;
 }
 
 .circle {
-    width: 100%;
-    height: 100%;
-    fill: none;
-    stroke-width: 10;
-    stroke-linecap: round;
-    stroke: url(#gradient);
-    transform: rotate(-90deg);
-    transform-origin: center;
-    stroke-dasharray: 565.48;
-    stroke-dashoffset: 565.48;
-    animation: dash 2s ease-in-out forwards;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke: url(#gradient);
+  transform: rotate(-90deg);
+  transform-origin: center;
+  stroke-dasharray: 565.48;
+  stroke-dashoffset: 565.48;
+  animation: dash 2s ease-in-out forwards;
 }
 
+/* Background and Animation Styles */
 .gradient-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    opacity: 0;
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
-    pointer-events: none;
-    z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .gradient-background.visible {
-    opacity: 1;
-    transition: opacity 0.5s ease-in;
+  opacity: 1;
+  transition: opacity 0.5s ease-in;
 }
 
 .stars {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    background-image: 
-        radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
-        radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)),
-        radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0,0,0,0)),
-        radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
-        radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0));
-    background-repeat: repeat;
-    background-size: 200px 200px;
-    opacity: 0;
-    transform: translateZ(0);
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-image: radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)), radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)), radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0,0,0,0)), radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)), radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0));
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  opacity: 0;
+  transform: translateZ(0);
 }
 
 .stars.active {
-    animation: starsMove 2s ease-in forwards;
+  animation: starsMove 2s ease-in forwards;
 }
 
+/* Content Styles */
 .percentage {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-family: Arial, sans-serif;
-    font-size: 2rem;
-    color: white;
-    opacity: 1;
-    transition: opacity 0.5s ease-in-out;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: Arial, sans-serif;
+  font-size: 2rem;
+  color: white;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
 }
 
 .percentage.fade {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0);
-    transition: all 0.5s ease-in-out;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+  transition: all 0.5s ease-in-out;
 }
 
 .welcome-content {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    opacity: 0;
-    z-index: 3;
-    visibility: hidden;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  opacity: 0;
+  z-index: 3;
+  visibility: hidden;
 }
 
 .welcome-content.visible {
-    animation: fadeInContent 1s ease-in forwards;
-    visibility: visible;
+  animation: fadeInContent 1s ease-in forwards;
+  visibility: visible;
 }
 
 .welcome-text {
-    font-family: Arial, sans-serif;
-    font-size: clamp(2rem, 5vw, 3rem);
-    color: white;
-    margin-bottom: 2rem;
-    text-shadow: 0 0 10px rgba(0, 255, 247, 0.5);
-    text-align: center;
+  font-family: Arial, sans-serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: white;
+  margin-bottom: 2rem;
+  text-shadow: 0 0 10px rgba(0, 255, 247, 0.5);
+  text-align: center;
 }
 
+/* Button Styles */
 .learn-button {
-    padding: clamp(10px, 3vw, 15px) clamp(20px, 5vw, 30px);
-    font-size: clamp(1rem, 3vw, 1.2rem);
-    background: linear-gradient(45deg, #00fff7, #ff00ff);
-    border: none;
-    border-radius: 25px;
-    color: white;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  padding: clamp(10px, 3vw, 15px) clamp(20px, 5vw, 30px);
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  background: linear-gradient(45deg, #00fff7, #ff00ff);
+  border: none;
+  border-radius: 25px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
 .learn-button:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 20px rgba(0, 255, 247, 0.5);
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(0, 255, 247, 0.5);
 }
 
+/* Tip Container Styles */
 .tip-container {
   position: fixed;
   bottom: clamp(20px, 5vh, 40px);
@@ -209,136 +211,16 @@ body {
 }
 
 .tip-container.fade {
-    opacity: 0;
-    transform: translateX(-50%) translateY(20px);
-    transition: all 0.5s ease-out;
-}
-
-.tip-label {
-    color: #00fff7;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 0.9rem;
-}
-
-.tip-text {
-    color: rgba(255, 255, 255, 0.9);
-    line-height: 1.4;
-    transition: opacity 0.3s ease;
-}
-
-.tip-text.changing {
-    animation: tipFadeIn 0.3s ease-out;
-}
-
-.schedule-container {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
   opacity: 0;
-  visibility: hidden;
-  z-index: 4;
-  width: min(90vw, 600px);
-  padding: 30px;
+  transform: translateX(-50%) translateY(20px);
+  transition: all 0.5s ease-out;
 }
 
-.schedule-container.visible {
-    opacity: 1;
-    visibility: visible;
-    transition: all 0.5s ease;
-}
-
-.schedule-title {
-  color: white;
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
-  margin-bottom: 20px;
-  font-weight: bold;
-}
-
-.schedule-image {
-  width: 100%;
-  max-width: 400px;
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 255, 247, 0.3);
-}
-
-.countdown {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    color: white;
-    font-size: 2rem;
-    font-weight: bold;
-}
-
-.final-buttons {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  opacity: 0;
-  visibility: hidden;
-  z-index: 5;
-  width: min(90%, 300px);
-}
-
-.final-buttons.visible {
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 0.5s ease;
-}
-
-.final-button {
-  width: 100%;
-  padding: clamp(12px, 3vw, 15px) clamp(20px, 5vw, 30px);
-  font-size: clamp(1rem, 3vw, 1.2rem);
-  background: none;
-  border: 2px solid white;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.final-button:hover {
-    background: white;
-    color: #3498db;
-    transform: scale(1.1);
-}
-
-.final-button::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 0;
-    height: 0;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    transition: width 0.6s ease, height 0.6s ease;
-}
-
-.final-button:hover::before {
-    width: 300px;
-    height: 300px;
-}
-
+/* Various Elements Styles */
 .hide {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
 .info-text {
@@ -357,9 +239,10 @@ body {
 }
 
 .info-text.show {
-    animation: fadeInUp 0.5s ease forwards;
+  animation: fadeInUp 0.5s ease forwards;
 }
 
+/* Navigation Button Styles */
 .nav-button {
   position: fixed;
   padding: clamp(6px, 2vw, 8px) clamp(10px, 3vw, 12px);
@@ -377,226 +260,110 @@ body {
 }
 
 .nav-button.visible {
-    opacity: 1;
-    visibility: visible;
+  opacity: 1;
+  visibility: visible;
 }
 
 .nav-button:hover {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  transform: translateY(-1px);
 }
 
-.schedule-btn {
-    top: 20px;
-    left: 20px;
-}
-
-.back-btn {
-    top: 20px;
-    right: 20px;
-}
-
-.see-more {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.9rem;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 5px;
-}
-
-.see-more:hover {
-    color: rgba(255, 255, 255, 0.9);
-    transform: translateY(-1px);
-}
-
+/* Keyframes */
 @keyframes tunnelTravel {
-    0% {
-        opacity: 0;
-        transform: translateZ(0px) scale(2);
-    }
-    20% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 1;
-        transform: translateZ(2000px) scale(0.1);
-    }
+  0% {
+    opacity: 0;
+    transform: translateZ(0px) scale(2);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translateZ(2000px) scale(0.1);
+  }
 }
 
 @keyframes sceneZoom {
-    0% {
-        transform: translateZ(0px);
-    }
-    100% {
-        transform: translateZ(2000px);
-    }
+  0% {
+    transform: translateZ(0px);
+  }
+  100% {
+    transform: translateZ(2000px);
+  }
 }
 
 @keyframes rotate {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-@keyframes completeLoader {
-    0% {
-        transform: scale(1) rotate(0deg);
-    }
-    100% {
-        transform: scale(20) rotate(180deg);
-        opacity: 0;
-    }
-}
-
-@keyframes dash {
-    0% {
-        stroke-dashoffset: 565.48;
-    }
-    100% {
-        stroke-dashoffset: 0;
-    }
-}
-
-@keyframes gradientBG {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-@keyframes starsMove {
-    0% {
-        opacity: 0;
-        transform: translateZ(0);
-    }
-    20% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 1;
-        transform: translateZ(1000px);
-    }
-}
-
-@keyframes tipFadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeInContent {
-    0% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.8);
-    }
-    100% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-    }
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translate(-50%, 20px);
-    }
-    to {
-        opacity: 0.8;
-        transform: translate(-50%, 0);
-    }
-}
-
-/* Mobile-specific adjustments */
+/* Media Queries */
 @media (max-width: 768px) {
-    .nav-button {
-      padding: 8px 12px;
-    }
-  
-    .schedule-btn {
-      top: 10px;
-      left: 10px;
-    }
-  
-    .back-btn {
-      top: 10px;
-      right: 10px;
-    }
-  
-    .tip-container {
-      bottom: 10px;
-    }
-  
-    .welcome-content {
-      width: 90%;
-      text-align: center;
-    }
-  
-    .schedule-container {
-      padding: 15px;
-    }
-  
-    .final-buttons {
-      width: 85%;
-    }
+  .nav-button {
+    padding: 8px 12px;
   }
-  
-  /* Landscape mode adjustments */
-  @media (max-height: 500px) and (orientation: landscape) {
-    .loader {
-      width: min(150px, 30vh);
-      height: min(150px, 30vh);
-    }
-  
-    .welcome-text {
-      font-size: clamp(1.5rem, 4vh, 2rem);
-      margin-bottom: 1rem;
-    }
-  
-    .schedule-container {
-      padding: 10px;
-    }
-  
-    .schedule-image {
-      max-height: 70vh;
-      width: auto;
-    }
-  
-    .tip-container {
-      bottom: 5px;
-    }
+  .schedule-btn {
+    top: 10px;
+    left: 10px;
   }
-  
-  /* High-resolution screens */
-  @media (min-width: 1400px) {
-    .welcome-text {
-      font-size: 3.5rem;
-    }
-  
-    .learn-button {
-      padding: 20px 40px;
-      font-size: 1.4rem;
-    }
-  
-    .schedule-container {
-      max-width: 800px;
-    }
-  
-    .schedule-image {
-      max-width: 600px;
-    }
+  .back-btn {
+    top: 10px;
+    right: 10px;
   }
+  .tip-container {
+    bottom: 10px;
+  }
+  .welcome-content {
+    width: 90%;
+    text-align: center;
+  }
+  .schedule-container {
+    padding: 15px;
+  }
+  .final-buttons {
+    width: 85%;
+  }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .loader {
+    width: min(150px, 30vh);
+    height: min(150px, 30vh);
+  }
+  .welcome-text {
+    font-size: clamp(1.5rem, 4vh, 2rem);
+    margin-bottom: 1rem;
+  }
+  .schedule-container {
+    padding: 10px;
+  }
+  .schedule-image {
+    max-height: 70vh;
+    width: auto;
+  }
+  .tip-container {
+    bottom: 5px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .welcome-text {
+    font-size: 3.5rem;
+  }
+  .learn-button {
+    padding: 20px 40px;
+    font-size: 1.4rem;
+  }
+  .schedule-container {
+    max-width: 800px;
+  }
+  .schedule-image {
+    max-width: 600px;
+  }
+}
