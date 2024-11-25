@@ -155,5 +155,5 @@ elements.finalButton?.addEventListener('click', () => {
 });
 
 elements.seeMore?.addEventListener('click', () => {
-  window.location.href = 'https://stoy109.github.io/sebuah-ringkasan/Main-materi/mainmateri.html';
+  window.location.href = 'https://cactus-switch-e8b.notion.site/Kumpulan-Ringkasan-END-149d11bc9ef080908d20c3b1b5126ca4?pvs=4';
 });
