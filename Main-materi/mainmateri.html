@@ -186,31 +186,103 @@
 
     .button-container {
       display: flex;
+      flex-direction: column;
+      align-items: center;
       gap: 20px;
       z-index: 1;
+    }
+
+    .tip-container {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 15px 30px;
+      border-radius: 15px;
+      color: white;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      font-size: 18px;
+      max-width: 80%;
+      animation: fadeIn 0.5s ease-in-out;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translate(-50%, 20px);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+    }
+
+    .links-container {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
     }
   </style>
 </head>
 <body>
-  <div class="particles">
-    <script>
-      for (let i = 0; i < 20; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        particle.style.left = Math.random() * 100 + 'vw';
-        particle.style.animationDelay = Math.random() * 20 + 's';
-        particle.style.opacity = Math.random();
-        particle.style.width = particle.style.height = Math.random() * 15 + 5 + 'px';
-        document.querySelector('.particles').appendChild(particle);
-      }
-    </script>
-  </div>
+  <div class="particles"></div>
   
   <a href="https://bit.ly/sebuahringkasan" class="back-btn">Back</a>
   
   <div class="button-container">
-    <a href="https://cactus-switch-e8b.notion.site/Agama-147d11bc9ef080cebd4ccad5888f99ab?pvs=4" class="btn btn1">Agama</a>
-    <a href="https://cactus-switch-e8b.notion.site/Pancasila-147d11bc9ef0805eade7cd1eecc6b20c?pvs=4" class="btn btn2">Pancasila</a>
+    <div class="links-container">
+      <a href="https://cactus-switch-e8b.notion.site/Agama-147d11bc9ef080cebd4ccad5888f99ab?pvs=4" class="btn btn1">Agama</a>
+      <a href="https://cactus-switch-e8b.notion.site/Pancasila-147d11bc9ef0805eade7cd1eecc6b20c?pvs=4" class="btn btn2">Pancasila</a>
+    </div>
+    <div class="tip-container" id="tipDisplay"></div>
   </div>
+
+  <script>
+    // Create particles
+    for (let i = 0; i < 20; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.left = Math.random() * 100 + 'vw';
+      particle.style.animationDelay = Math.random() * 20 + 's';
+      particle.style.opacity = Math.random();
+      particle.style.width = particle.style.height = Math.random() * 15 + 5 + 'px';
+      document.querySelector('.particles').appendChild(particle);
+    }
+
+    // Tips array
+    const tips = [
+      "Kalau kau malas baca, mungkin baca *tip ini* saja sudah berat.",
+      "Ringkasan ini dibuat supaya kau nggak perlu mikir, jadi jangan lupa ngocok.",
+      "Kalau kamu nggak mau baca, kok ada di sini? Silahkan.",
+      "Jika tip ini muncul selamat... selamat aja",
+      "Jangan terlalu malas, nanti orang yang buat ringkasan ini juga jadi malas.",
+      "Hidupmu pasti sangat sibuk. Luar biasa",
+      "Membaca ringkasan saja masih berat? Tenang, ada apa? yes ChatGPT.",
+      "Ini adalah website khusus untuk yang malas tapi sok sibuk. Nikmati.",
+      "Kalau ringkasan ini masih terlalu panjang, silahkan keluar lalu tidor joh.",
+      "Malas itu manusiawi, tapi ingat, kamu masih harus klik sesuatu di sini."
+    ];
+
+    // Function to display random tip
+    function displayRandomTip() {
+      const tipDisplay = document.getElementById('tipDisplay');
+      const randomTip = tips[Math.floor(Math.random() * tips.length)];
+      tipDisplay.textContent = randomTip;
+      tipDisplay.style.animation = 'none';
+      tipDisplay.offsetHeight; // Trigger reflow
+      tipDisplay.style.animation = 'fadeIn 0.5s ease-in-out';
+    }
+
+    // Display initial tip
+    displayRandomTip();
+
+    // Change tip every 5 seconds
+    setInterval(displayRandomTip, 5000);
+  </script>
 </body>
 </html>
