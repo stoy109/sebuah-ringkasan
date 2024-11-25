@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengembangan Wilayah dan Tata Ruang</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+        .gradient-bg {
+            background: linear-gradient(45deg, #4b6cb7, #182848, #4b6cb7);
+            background-size: 200% 200%;
+            animation: gradientBG 15s ease infinite;
+        }
+        @keyframes gradientBG {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+        .title-animation {
+            animation: titleFloat 3s ease-in-out infinite;
+        }
+        @keyframes titleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .tab-content {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .tab-content.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .tab-btn {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .tab-btn::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #3b82f6;
+            transition: width 0.3s ease;
+        }
+        .tab-btn.active::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <header class="gradient-bg text-white py-8 px-4 sm:px-6 lg:px-8">
+        <div class="container mx-auto">
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-center title-animation">Pengembangan Wilayah dan Tata Ruang</h1>
+        </div>
+    </header>
+
+    <nav class="bg-white shadow-md py-4 px-4 sm:px-6 lg:px-8 sticky top-0 z-10">
+        <div class="container mx-auto flex flex-wrap justify-center space-x-2 sm:space-x-4">
+            <button class="tab-btn px-3 py-2 text-sm sm:text-base font-medium" data-tab="karakteristik">Karakteristik Wilayah</button>
+            <button class="tab-btn px-3 py-2 text-sm sm:text-base font-medium" data-tab="pengembangan">Pengembangan Wilayah</button>
+            <button class="tab-btn px-3 py-2 text-sm sm:text-base font-medium" data-tab="desa-kota">Desa dan Kota</button>
+        </div>
+    </nav>
+
+    <main class="container mx-auto mt-8 px-4 sm:px-6 lg:px-8">
+        <div id="karakteristik" class="tab-content">
+            <h2 class="text-2xl sm:text-3xl font-semibold mb-6">Karakteristik Wilayah</h2>
+            <div class="bg-white rounded-lg shadow-lg p-4 sm:p-6 animate-card mb-6">
+                <p class="mb-4">Kondisi fisik suatu wilayah sangat memengaruhi karakteristiknya, seperti Kabupaten Sleman yang dikenal dengan Gunung Merapi. Beberapa karakteristik penting wilayah:</p>
+                <ul class="list-disc pl-6 mb-4">
+                    <li class="floating">Batas wilayah: Membantu mengenali karakteristik unik wilayah.</li>
+                    <li class="floating" style="animation-delay: 0.5s">Kesatuan internal: Menggambarkan keseragaman dalam wilayah tersebut.</li>
+                    <li class="floating" style="animation-delay: 1s">Karakteristik alami: Seperti tanah, geomorfologi, industri, dan budaya.</li>
+                    <li class="floating" style="animation-delay: 1.5s">Batas wilayah: Bisa berubah dan bisa berbentuk fisik (jalan, sungai) atau maya (batas etnik, budaya).</li>
+                </ul>
+                
+                <h3 class="text-xl font-semibold mb-2">1. Pengaruh Faktor Fisik</h3>
+                <ul class="list-disc pl-6 mb-4">
+                    <li class="floating">Bentang lahan: Dipengaruhi geologi dan geomorfologi.</li>
+                    <li class="floating" style="animation-delay: 0.5s">Sumber daya alam:
+                        <ul class="list-circle pl-6">
+                            <li>Air: Air permukaan dan tanah.</li>
+                            <li>Lahan: Potensi ketahanan pangan.</li>
+                            <li>Hayati: Flora dan fauna.</li>
+                            <li>Mineral: Potensi pertambangan.</li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <h3 class="text-xl font-semibold mb-2">2. Dinamika Wilayah dan Pengaruh Sosial</h3>
+                <p class="mb-4">Perubahan wilayah berdampak pada sosial ekonomi, menciptakan peluang kerja dan peningkatan kesejahteraan masyarakat. Contoh dampak positif: layanan pendidikan, kesehatan, transportasi, dan komunikasi yang lebih baik.</p>
+                
+                <h3 class="text-xl font-semibold mb-2">3. Struktur Ruang Wilayah Fungsional</h3>
+                <p class="mb-4">Wilayah terbentuk dari beberapa komponen:</p>
+                <ul class="list-disc pl-6 mb-4">
+                    <li class="floating">Gerakan (Movement): Keterkaitan ruang fisik, ekonomi, sosial, teknologi, dan pelayanan.</li>
+                    <li class="floating" style="animation-delay: 0.5s">Simpul (Node): Distribusi komoditas dari wilayah yang berbeda (contoh: sayuran di pegunungan, ikan di pesisir).</li>
+                    <li class="floating" style="animation-delay: 1s">Hierarki: Letak geografis mempengaruhi potensi dan perkembangan wilayah.</li>
+                    <li class="floating" style="animation-delay: 1.5s">Perkembangan permukaan: Membentuk struktur ruang secara bertahap sesuai pertumbuhan wilayah.</li>
+                </ul>
+                
+                <h3 class="text-xl font-semibold mb-2">4. Fungsi Wilayah</h3>
+                <p class="mb-4">Wilayah memiliki beberapa fungsi:</p>
+                <ul class="list-disc pl-6 mb-4">
+                    <li class="floating">Pelayanan: Kota sebagai pusat pelayanan dan komunikasi.</li>
+                    <li class="floating" style="animation-delay: 0.5s">Transfer pembangunan: Proses transfer pembangunan dari pusat ke daerah.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="pengembangan" class="tab-content">
+            <h2 class="text-2xl sm:text-3xl font-semibold mb-6">Pengembangan Wilayah</h2>
+            <div class="bg-white rounded-lg shadow-lg p-4 sm:p-6 animate-card mb-6">
+                <p class="mb-4">Pengembangan wilayah adalah upaya untuk mendorong laju pertumbuhan suatu wilayah, meningkatkan kualitas hidup masyarakat, serta mengurangi kesenjangan antarwilayah.</p>
+                
+                <h3 class="text-xl font-semibold mb-2">Tujuan Pengembangan Wilayah:</h3>
+                <ul class="list-disc pl-6 mb-4">
+                    <li class="floating">Meningkatkan kesejahteraan masyarakat.</li>
+                    <li class="floating" style="animation-delay: 0.5s">Mengurangi kesenjangan antarwilayah.</li>
+                    <li class="floating" style="animation-delay: 1s">Meningkatkan kualitas lingkungan hidup.</li>
+                    <li class="floating" style="animation-delay: 1.5s">Mewujudkan kehidupan yang seimbang.</li>
+                </ul>
+                
+                <h3 class="text-xl font-semibold mb-2">Konsep Pengembangan Wilayah:</h3>
+                <ol class="list-decimal pl-6 mb-4">
+                    <li class="floating">Pengembangan wilayah berbasis sumber daya.</li>
+                    <li class="floating" style="animation-delay: 0.5s">Pengembangan wilayah berbasis komoditas unggulan.</li>
+                    <li class="floating" style="animation-delay: 1s">Pengembangan wilayah berbasis efisiensi.</li>
+                    <li class="floating" style="animation-delay: 1.5s">Pengembangan wilayah menurut pelaku pembangunan.</li>
+                </ol>
+                
+                <h4 class="text-lg font-semibold mb-2">Elemen Pengembangan:</h4>
+                <ul class="list-disc pl-6 mb-4">
+                    <li class="floating">Sumber daya alam: Modal penting.</li>
+                    <li class="floating" style="animation-delay: 0.5s">Sumber daya manusia: Modal utama.</li>
+                    <li class="floating" style="animation-delay: 1s">Teknologi: Alat bantu utama.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="desa-kota" class="tab-content">
+            <h2 class="text-2xl sm:text-3xl font-semibold mb-6">Pengembangan Wilayah Pedesaan dan Perkotaan</h2>
+            <div class="bg-white rounded-lg shadow-lg p-4 sm:p-6 animate-card mb-6">
+                <h3 class="text-xl font-semibold mb-4">1. Wilayah Perdesaan</h3>
+                <p class="mb-4">Desa, berasal dari kata Sanskerta "dhesi" yang berarti tanah lahir, adalah kesatuan masyarakat hukum yang memiliki batas wilayah dan wewenang dalam mengatur kepentingan masyarakat setempat.</p>
+                
+                <h4 class="text-lg font-semibold mb-2">Unsur-unsur Desa:</h4>
+                <ul class="list-disc pl-6 mb-4">
+                    <li class="floating">Wilayah: Lokasi, batas, luas, dan pemanfaatan lahan.</li>
+                    <li class="floating" style="animation-delay: 0.5s">Penduduk: Tingkat kelahiran, kematian, kepadatan, dan mata pencaharian.</li>
+                    <li class="floating" style="animation-delay: 1s">Tata Kehidupan: Pola pergaulan, adat istiadat, norma.</li>
+                </ul>
+                
+                <h4 class="text-lg font-semibold mb-2">Klasifikasi Desa:</h4>
+                <ol class="list-decimal pl-6 mb-4">
+                    <li class="floating">Desa Tradisional: Bergantung pada alam, penduduk tertutup terhadap dunia luar.</li>
+                    <li class="floating" style="animation-delay: 0.5s">Desa Swadaya: Mulai berkembang, penduduk berpendidikan rendah, mayoritas petani.</li>
+                    <li class="floating" style="animation-delay: 1s">Desa Swakarya: Lebih maju, mulai terpengaruh pengaruh luar, mata pencaharian bervariasi.</li>
+                    <li class="floating" style="animation-delay: 1.5s">Desa Swasembada: Desa maju, penduduknya bekerja di berbagai sektor seperti jasa, seni, perdagangan, agraris, dan industri.</li>
+                </ol>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-lg p-4 sm:p-6 animate-card mb-6">
+                <h3 class="text-xl font-semibold mb-4">2. Wilayah Kota</h3>
+                <p class="mb-4">Kota adalah pusat pemukiman, ekonomi, dan aktivitas sosial yang berkembang pesat berkat pembangunan fisik.</p>
+                
+                <h4 class="text-lg font-semibold mb-2">Ciri Fisik Kota</h4>
+                <ul class="list-disc pl-6 mb-4">
+                    <li class="floating">Memiliki kompleks perumahan.</li>
+                    <li class="floating" style="animation-delay: 0.5s">Beragam fasilitas ekonomi, sosial, dan budaya.</li>
+                    <li class="floating" style="animation-delay: 1s">Pusat pemerintahan.</li>
+                    <li class="floating" style="animation-delay: 1.5s">Jaringan transportasi yang kompleks.</li>
+                </ul>
+                
+                <h4 class="text-lg font-semibold mb-2">Ciri Sosial Kota</h4>
+                <ul class="list-disc pl-6 mb-4">
+                    <li class="floating">Heterogenitas penduduk.</li>
+                    <li class="floating" style="animation-delay: 0.5s">Stratifikasi sosial berdasarkan profesi dan pendidikan.</li>
+                    <li class="floating" style="animation-delay: 1s">Interaksi sosial berdasarkan kepentingan.</li>
+                    <li class="floating" style="animation-delay: 1.5s">Mobilitas sosial tinggi.</li>
+                </ul>
+                
+                <h4 class="text-lg font-semibold mb-2">Klasifikasi Kota</h4>
+                <ol class="list-decimal pl-6 mb-4">
+                    <li class="floating">Berdasarkan jumlah penduduk: kota kecil, sedang, besar, metropolitan, megapolitan.</li>
+                    <li class="floating" style="animation-delay: 0.5s">Berdasarkan fungsi: kota pusat pemerintahan, perdagangan, industri, pendidikan, wisata, dll.</li>
+                </ol>
+                
+                <h4 class="text-lg font-semibold mb-2">Perbedaan Desa dan Kota</h4>
+                <table class="w-full border-collapse border border-gray-300 mb-4">
+                    <thead>
+                        <tr class="bg-gray-100">
+                            <th class="border border-gray-300 p-2">Aspek</th>
+                            <th class="border border-gray-300 p-2">Desa</th>
+                            <th class="border border-gray-300 p-2">Kota</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border border-gray-300 p-2">Mata Pencaharian</td>
+                            <td class="border border-gray-300 p-2">Agraris</td>
+                            <td class="border border-gray-300 p-2">Non-agraris</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 p-2">Lingkungan</td>
+                            <td class="border border-gray-300 p-2">Alami</td>
+                            <td class="border border-gray-300 p-2">Buatan</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 p-2">Kepadatan Penduduk</td>
+                            <td class="border border-gray-300 p-2">Rendah</td>
+                            <td class="border border-gray-300 p-2">Tinggi</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 p-2">Hubungan Sosial</td>
+                            <td class="border border-gray-300 p-2">Akrab</td>
+                            <td class="border border-gray-300 p-2">Renggang</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-6 px-4 sm:px-6 lg:px-8 mt-8">
+        <div class="container mx-auto text-center">
+            <div id="bible-verse" class="mb-4">
+                <p class="text-sm italic">"Sebab bagi ALLAH tidak ada yang Mustahil." - Lukas 1:37</p>
+            </div>
+            <p class="text-sm">sigma</p>
+        </div>
+    </footer>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabId = btn.getAttribute('data-tab');
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                });
+                document.getElementById(tabId).classList.add('active');
+                tabBtns.forEach(btn => btn.classList.remove('active', 'text-blue-600'));
+                btn.classList.add('active', 'text-blue-600');
+
+                // Animate content
+                gsap.from(`#${tabId} > *`, {
+                    y: 20,
+                    opacity: 0,
+                    stagger: 0.1,
+                    duration: 0.5,
+                    ease: "power2.out"
+                });
+            });
+        });
+
+        // Set default active tab
+        document.querySelector('.tab-btn').click();
+
+        // Animate cards on scroll
+        gsap.utils.toArray('.animate-card').forEach(card => {
+            gsap.from(card, {
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top bottom-=100",
+                    end: "top center",
+                    scrub: true
+                }
+            });
+        });
+
+        // Rotating Bible verses
+        const verses = [
+            '"Sebab bagi ALLAH tidak ada yang Mustahil." - Lukas 1:37',
+            '"Dan apa saja yang kamu minta dalam doa dengan penuh kepercayaan, kamu akan menerimanya." - Matius 21:22',
+            '"Janganlah meninggalkan hikmat itu, maka engkau akan dipeliharaNya, kasihlah dia maka engkau akan dijagaNya." - Amsal 4:6',
+            '"Bukankah telah kuperintahkan kepadamu: kuatkan dan teguhkanlah hatimu? Janganlah kecut dan tawar hati, sebab TUHAN ALLAHmu menyertai engkau, kemanapun engkau pergi." - Yosua 1:9',
+            '"Tetapi aku menasihatkan kamu, saudara-saudara, demi nama TUHAN kita Yesus Kristus, supaya kamu seia sekata dan jangan ada perpecahan di antara kamu, tetapi sebaliknya supaya kamu erat bersatu dan sehati sepikir." - 1 Korintus 1:10',
+            '"Tetapi hendaklah kamu ramah seorang terhadap yang lain, penuh kasih mesra, dan saling mengampuni, sebagaimana ALLAH di dalam Kristus telah mengampuni kamu." - Efesus 4:32',
+            '"Mengucap syukurlah dalam segala hal, sebab itulah yang dikehendaki ALLAH di dalam Kristus Yesus bagi kamu." - 1 Tesalonika 5:18',
+            '"Janganlah hendaknya kerajinanmu kendor, biarlah rohmu menyala-nyala dan layanilah TUHAN." - Roma 12:11'
+        ];
+
+        let currentVerseIndex = 0;
+        const verseElement = document.getElementById('bible-verse');
+
+        function changeVerse() {
+            gsap.to(verseElement, {
+                opacity: 0,
+                y: -20,
+                duration: 0.5,
+                onComplete: () => {
+                    verseElement.innerHTML = `<p class="text-sm italic">${verses[currentVerseIndex]}</p>`;
+                    currentVerseIndex = (currentVerseIndex + 1) % verses.length;
+                    gsap.to(verseElement, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.5
+                    });
+                }
+            });
+        }
+
+        setInterval(changeVerse, 10000); // Change verse every 10 seconds
+
+        // Floating animation for list items
+        gsap.utils.toArray('.floating').forEach((item, index) => {
+            gsap.to(item, {
+                y: -10,
+                duration: 1.5,
+                repeat: -1,
+                yoyo: true,
+                ease: "sine.inOut",
+                delay: index * 0.1
+            });
+        });
+    </script>
+</body>
+</html>
