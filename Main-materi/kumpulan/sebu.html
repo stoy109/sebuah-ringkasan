@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belajar Seni Pertunjukan: Materi dan Rancangan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            --text-primary: #2d3748;
+            --text-secondary: #4a5568;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f7fafc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-secondary);
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        .header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #fff, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: var(--bg-primary);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 1rem;
+            min-height: 500px;
+        }
+
+        .chapter {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .chapter.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .markdown-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .markdown-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .markdown-content h2 {
+            margin: 2rem 0 1rem;
+            color: #4a5568;
+        }
+
+        .markdown-content ul {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .content {
+                margin: 1rem;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-links">
+            <a class="nav-link" onclick="loadChapter(5)">Bab 5</a>
+            <a class="nav-link" onclick="loadChapter(6)">Bab 6</a>
+            <a class="nav-link" onclick="loadChapter(7)">Bab 7</a>
+        </div>
+    </nav>
+
+    <header class="header">
+        <h1>Belajar Seni Pertunjukan</h1>
+        <p>Eksplorasi Dunia Seni Pertunjukan Indonesia</p>
+    </header>
+
+    <main class="content">
+        <div id="chapter-content" class="markdown-content">
+            <div style="text-align: center; padding: 2rem;">
+                <h2>Selamat Datang! 👋</h2>
+                <p>Silakan pilih bab yang ingin Anda pelajari dari menu di atas.</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Chapter contents
+        const chapters = {
+            5: `# Rancangan Manajemen Pergelaran Tari
+
+## Pengertian Manajemen Pergelaran Tari
+
+**Manajemen pergelaran tari** adalah proses perencanaan dan pengambilan keputusan dalam sebuah pergelaran tari yang mencakup pelaksanaan pementasan, mulai dari materi hingga aspek artistik di atas panggung.
+
+## Tahapan Manajemen Pergelaran Tari
+
+### 1. Perencanaan
+
+Menetapkan sasaran atau target pergelaran dan memilih tindakan yang akan dilakukan dari berbagai alternatif yang ada.
+
+### 2. Pengorganisasian
+
+Pembentukan tim atau kepanitiaan dengan mengalokasikan sumber daya manusia, menentukan tim yang diperlukan, dan menunjuk penanggung jawab masing-masing.
+
+### 3. Pengendalian
+
+Melakukan tindakan korektif jika realisasi tidak sesuai dengan rencana untuk memastikan pergelaran berjalan sukses.
+
+## Kepanitiaan Pergelaran Tari
+
+### Tim Administrasi
+
+1. **Pimpinan Produksi**: Memimpin seluruh perencanaan dan pelaksanaan pergelaran.
+2. **Sekretaris**: Mengelola administrasi dan dokumentasi.
+3. **Bendahara**: Bertanggung jawab atas keuangan.
+4. **Humas**: Menangani hubungan publik dan promosi.
+5. **Divisi Lainnya**: Bertugas sesuai kebutuhan, beserta kru pendukung.
+
+### Tim Artistik
+
+1. **Penata Tari**: Mengatur koreografi dan gerakan tari.
+2. **Penata Musik**: Menyusun dan mengatur musik pengiring.
+3. **Penata Rias dan Busana**: Menyiapkan kostum dan tata rias penari.
+4. **Penata Lampu (Lighting Man)**: Mengatur pencahayaan panggung.
+5. **Penata Suara (Soundman)**: Mengelola tata suara selama pergelaran.
+6. **Stage Manager dan Kru Panggung**: Mengkoordinasikan teknis panggung.
+
+## Perencanaan Anggaran dan Pencarian Dana
+
+Keberhasilan pementasan bergantung pada perencanaan dan persiapan yang baik. Berikut komponen anggaran yang perlu diperhatikan:
+
+### 1. Sewa Tempat Pentas
+
+Memilih tempat yang sesuai dengan kebutuhan pergelaran, seperti pendopo atau gedung pertunjukan.
+
+### 2. Tata Panggung dan Kru
+
+Biaya untuk dekorasi, lighting man, dan soundman yang merancang tata lampu dan suara.
+
+### 3. Konsumsi
+
+Mengatur kebutuhan konsumsi bagi tim saat latihan hingga pementasan, termasuk menu dan anggaran per porsi.
+
+### 4. Kostum dan Rias
+
+Menghemat dengan menggunakan kostum yang sudah ada atau menyewa, jika memungkinkan.
+
+### 5. Dokumentasi
+
+Biaya untuk fotografer dan videografer, serta produksi foto dan video pergelaran.
+
+### 6. Publikasi
+
+Promosi melalui media cetak, audio, atau audiovisual, seperti iklan di surat kabar, radio, dan televisi.
+
+### 7. Biaya P3K
+
+Menyiapkan obat-obatan ringan untuk penanganan cedera saat latihan atau pementasan.
+
+## Pencarian Dana
+
+Strategi untuk memperoleh dana meliputi:
+
+- **Iuran**: Sumbangan dari anggota tim atau komunitas.
+- **Penggalangan Dana**: Kegiatan mengumpulkan dana dari sponsor atau donatur.
+
+## Kilas Tokoh: K.R.T. Sasminta Mardawa
+
+
+
+**K.R.T. Sasminta Mardawa**, atau Romo Sas, adalah seniman tari Indonesia yang dijuluki **Empu Tari Klasik Gaya Yogyakarta**. Keahliannya menjadikannya tokoh penting dalam dunia tari dan dihormati oleh masyarakat serta Keraton Yogyakarta.`,
+            6: `# MERANCANG DAN MEMBUAT KARYA TARI 🎭
+
+## Langkah-Langkah Merancang Karya Tari 📝
+
+### 1. Menentukan Tema dan Jenis Sajian
+- Pilih antara membuat tarian baru atau mempergelarkan tarian yang sudah ada
+- Tentukan format tarian:
+  - Solo/tunggal
+  - Duet
+  - Trio
+  - Kelompok
+  - Massal
+- Tetapkan jumlah penari dan tarian yang akan dipentaskan
+- Atur jadwal dan tempat latihan
+- Tentukan penanggung jawab untuk setiap aspek pertunjukan
+
+### 2. Pemilihan Tim Kreatif 👥
+
+#### a. Penari
+- Bisa melalui audisi atau disesuaikan dengan kebutuhan
+- Untuk ujian kompetensi, pemilihan bisa lebih fleksibel
+
+#### b. Penata Musik 🎵
+- Koordinasi antara penari dan pemusik sangat penting
+- Jika menggunakan musik rekaman, pastikan kualitas studio memadai
+- Contoh alat musik: Kendang (sering digunakan dalam tari tradisional Jawa)
+
+#### c. Penata Busana dan Rias 👗
+- Bertanggung jawab atas kostum dan tata rias
+- Mengatur tata rambut dan kebutuhan penampilan lainnya
+
+## Tips Membuat Karya Tari ✨
+- Mulai dengan gerakan yang sudah dikuasai
+- Kembangkan gerakan dasar menjadi variasi baru
+- Latihan rutin sangat penting untuk hasil yang maksimal
+- Disiplin dan kerja keras adalah kunci kesuksesan
+
+## Tokoh Inspiratif 🌟
+**Bagong Kussudiardja**
+- Koreografer dan Pelukis Indonesia terkenal
+- Memulai karir sebagai penari Jawa klasik di Yogyakarta (1954)
+- Berguru di Sekolah Tari Kredo Bekso Wiromo
+- Dibimbing oleh Pangeran Tedjokusumo
+
+## Contoh Tarian Indonesia 🇮🇩
+1. **Tari Legong** - Tari tradisional tunggal
+2. **Tari Kecak** - Tarian massal dari Bali
+3. **Tari Merak** - Tari kreasi baru dari Jawa Barat
+
+*Catatan: Kesuksesan sebuah pertunjukan tari bergantung pada persiapan yang matang dan koordinasi yang baik antar semua pihak yang terlibat.*`,
+            7: `# KONSEP, TEKNIK, DAN PROSEDUR TEATER KONTEMPORER 🎭
+
+## Jenis-Jenis Teater di Indonesia 🎪
+
+### 1. Teater Tradisional 👑
+Teater yang berkembang dalam lingkup budaya tertentu dan diwariskan turun-temurun.
+
+#### Bentuk-bentuk Teater Tradisional:
+1. **Wayang**
+   - Wayang Boneka (Wayang Kulit, Wayang Golek)
+   - Wayang Wong (diperankan manusia)
+   - Cerita: Mahabharata dan Ramayana
+
+2. **Makyong** (Riau)
+   - Menggunakan media tari, nyanyian, dan dialog
+   - Mengangkat cerita dan legenda rakyat setempat
+
+3. **Randai** (Minangkabau)
+   - Berbasis sastra lisan "kaba"
+   - Khas Sumatra Barat
+
+4. **Lenong** (Betawi)
+   - Teater tradisional Jakarta
+   - Karakteristik: humor dan kesegaran
+
+5. **Ketoprak** (Jawa)
+   - Keunikan: menggunakan 3 tingkatan bahasa
+   - Ngoko, Krama, dan Krama Inggil
+
+### 2. Teater Modern 🎬
+Berkembang karena pengaruh teater Barat/Eropa
+
+#### Ciri-ciri:
+- Dialog dalam bahasa Indonesia
+- Panggung tertutup dengan setting modern
+- Berfungsi sebagai hiburan dan kritik sosial
+- Dialog terstruktur dengan naskah
+
+#### Perkembangan Teater Modern:
+1. **Era Transisi** - Peralihan dari tradisional ke modern
+2. **1920-an** - Masa Pujangga Baru
+3. **1940-an** - Masa pendudukan Jepang
+4. **1950-an** - Berkembangnya drama realis
+5. **1970-an** - Mulai menggabungkan unsur modern dan tradisional
+6. **1980-1990an** - Era kebebasan berkreasi
+
+### 3. Teater Kontemporer 🎨
+- Tidak terikat bentuk baku
+- Bebas mengekspresikan kreativitas
+- Menggabungkan berbagai unsur teater
+- Contoh: "Mati Berdiri" (Hela Teater Festival 2017)
+
+## Tokoh Penting ⭐
+**Utuy Tatang Sontani** (1920-1979)
+- Sastrawan Angkatan 45
+- Pelopor drama realis Indonesia
+- Karya pertama: Tambera (1937)
+
+*Catatan: Teater di Indonesia terus berkembang dengan memadukan unsur tradisional dan modern, menciptakan bentuk-bentuk pertunjukan yang unik dan beragam.*`
+        };
+
+        function loadChapter(number) {
+            // Update active state in navigation
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Get the content container
+            const contentDiv = document.getElementById('chapter-content');
+
+            // Add fade out effect
+            contentDiv.style.opacity = 0;
+
+            // Wait for fade out, then update content
+            setTimeout(() => {
+                // Update content
+                contentDiv.innerHTML = marked.parse(chapters[number]);
+
+                // Fade in new content
+                contentDiv.style.opacity = 1;
+
+                // Scroll to top smoothly
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }, 300);
+        }
+    </script>
+</body>
+</html>
