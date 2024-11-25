@@ -12,7 +12,6 @@
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
         body {
             font-family: 'Poppins', sans-serif;
-            overflow-x: hidden;
         }
         .gradient-bg {
             background: linear-gradient(45deg, #4b6cb7, #182848, #4b6cb7);
@@ -58,6 +57,11 @@
         }
         .tab-btn.active::after {
             width: 100%;
+        }
+
+        .tab-content {
+            height: auto;
+            overflow-y: visible;
         }
     </style>
 </head>
