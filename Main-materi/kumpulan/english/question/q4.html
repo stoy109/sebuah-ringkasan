@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --success: #22c55e;
+            --error: #ef4444;
+            --background: #f8fafc;
+        }
+        
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: var(--background);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .quiz-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 40px;
+            color: white;
+            text-align: center;
+        }
+        
+        .quiz-header h1 {
+            margin: 0;
+            font-size: 2em;
+            font-weight: 700;
+            animation: slideDown 0.5s ease;
+        }
+        
+        .quiz-content {
+            padding: 40px;
+        }
+        
+        .question {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .options {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .option {
+            padding: 20px;
+            background: var(--background);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            animation: slideIn 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .option:hover {
+            transform: translateY(-2px);
+            background: #f1f5f9;
+        }
+        
+        .option.correct {
+            background: #dcfce7;
+            border-color: var(--success);
+            color: #166534;
+        }
+        
+        .option.wrong {
+            background: #fee2e2;
+            border-color: var(--error);
+            color: #991b1b;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: #e2e8f0;
+            margin: 40px 0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+        }
+        
+        .result {
+            text-align: center;
+            padding: 40px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .score {
+            font-size: 3em;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 20px 0;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        @keyframes slideDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .option::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.7) 0%, transparent 70%);
+            transform: scale(0);
+            transition: transform 0.5s ease;
+        }
+        
+        .option:active::before {
+            transform: scale(2);
+            transition: transform 0s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="quiz-header">
+            <h1>Word Choice Quiz</h1>
+        </div>
+        
+        <div class="quiz-content">
+            <div class="question" id="question"></div>
+            <div class="options" id="options"></div>
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                text: "1. We're only inviting the extended ___ family.",
+                answer: "immediate",
+                options: ["immediate", "close", "direct", "near"]
+            },
+            {
+                text: "3. Spirit houses are small ___ blessing to the protective spirit of a place outside houses in Thailand.",
+                answer: "shrine",
+                options: ["shrine", "temple", "offering", "blessing"]
+            },
+            {
+                text: "5. We always make a ___ fuss of Grandma on her birthday.",
+                answer: "big",
+                options: ["big", "huge", "large", "great"]
+            },
+            {
+                text: "6. All the mums (and some of the dads) had ___ in their throats.",
+                answer: "lumps",
+                options: ["lumps", "tears", "knots", "blocks"]
+            },
+            {
+                text: "7. Though it may be difficult to run regularly, it's worth the ___ attention in terms of fitness.",
+                answer: "extra",
+                options: ["extra", "added", "special", "focused"]
+            },
+            {
+                text: "8. Nathan had the ___ of his life at the snowboarding camp.",
+                answer: "highlight",
+                options: ["highlight", "time", "experience", "moment"]
+            },
+            {
+                text: "9. Seeing Germany beat Brazil at the World Cup final in Rio de Janeiro was a once in a ___ experience.",
+                answer: "lifetime",
+                options: ["lifetime", "generation", "century", "decade"]
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let shuffledQuestions = [];
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function initializeQuiz() {
+            shuffledQuestions = shuffleArray([...questions]);
+            currentQuestion = 0;
+            score = 0;
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            if (currentQuestion >= shuffledQuestions.length) {
+                showResults();
+                return;
+            }
+
+            const question = shuffledQuestions[currentQuestion];
+            document.getElementById('question').textContent = question.text;
+            
+            // Shuffle options
+            const shuffledOptions = shuffleArray([...question.options]);
+            const optionsHTML = shuffledOptions.map(option => 
+                `<div class="option" onclick="selectOption(this, '${option}')">${option}</div>`
+            ).join('');
+            
+            document.getElementById('options').innerHTML = optionsHTML;
+            updateProgress();
+        }
+
+        function selectOption(element, selected) {
+            const question = shuffledQuestions[currentQuestion];
+            const options = document.querySelectorAll('.option');
+            
+            options.forEach(option => {
+                option.onclick = null;
+                if (option === element) {
+                    if (selected === question.answer) {
+                        option.classList.add('correct');
+                        score++;
+                    } else {
+                        option.classList.add('wrong');
+                    }
+                }
+                if (option.textContent === question.answer) {
+                    option.classList.add('correct');
+                }
+            });
+
+            setTimeout(() => {
+                currentQuestion++;
+                loadQuestion();
+            }, 1500);
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / shuffledQuestions.length) * 100;
+            document.getElementById('progress').style.width = `${progress}%`;
+        }
+
+        function showResults() {
+            const percentage = (score / shuffledQuestions.length) * 100;
+            const container = document.querySelector('.quiz-content');
+            
+            container.innerHTML = `
+                <div class="result">
+                    <h2>Quiz Complete!</h2>
+                    <div class="score">${score}/${shuffledQuestions.length}</div>
+                    <p>You scored ${percentage.toFixed(1)}%</p>
+                    <button class="btn" onclick="initializeQuiz()">Try Again</button>
+                </div>
+            `;
+        }
+
+        initializeQuiz();
+    </script>
+</body>
+</html>
