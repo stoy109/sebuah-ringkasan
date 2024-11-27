@@ -1,0 +1,1 @@
+<h1 style=" background: linear-gradient(45deg, #ff6b6b, #4ecdc4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 72px; text-align: center; animation: pulse 2s infinite; "> Hello </h1> <style> @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } } </style>
