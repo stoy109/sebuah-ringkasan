@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Vocabulary Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            min-height: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            text-align: center;
+        }
+
+        .start-screen {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            padding: 20px;
+        }
+
+        .title {
+            color: #fff;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .subtitle {
+            color: #fff;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 0.3s;
+        }
+
+        .start-btn {
+            padding: 15px 40px;
+            font-size: 1.2em;
+            background: #00ff88;
+            border: none;
+            border-radius: 50px;
+            color: #1e3c72;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 0.5s;
+        }
+
+        .quiz-screen {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .question-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            color: #fff;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .options {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .option {
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+        }
+
+        .option:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(0, 255, 0, 0.2);
+            border-color: #00ff88;
+        }
+
+        .option.wrong {
+            background: rgba(255, 0, 0, 0.2);
+            border-color: #ff4444;
+        }
+
+        .results {
+            color: #fff;
+            text-align: center;
+        }
+
+        .score {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #00ff88;
+        }
+
+        .feedback {
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+
+        .progress {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: #00ff88;
+            width: 0%;
+            transition: width 0.5s;
+            border-radius: 2px;
+        }
+
+        .next-btn {
+            padding: 10px 30px;
+            font-size: 1.1em;
+            background: #00ff88;
+            border: none;
+            border-radius: 25px;
+            color: #1e3c72;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: none;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="start-screen" id="startScreen">
+            <h1 class="title">English Quiz</h1>
+            <p class="subtitle">Test your knowledge of English vocabulary and relationships!</p>
+            <button class="start-btn" onclick="startQuiz()">Start Quiz</button>
+        </div>
+
+        <div class="quiz-screen" id="quizScreen">
+            <div class="question-container">
+                <div class="question" id="question"></div>
+                <div class="options" id="options"></div>
+            </div>
+            <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Next Question</button>
+            <div class="progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            // Family Relationship Questions
+            {
+                text: "I used to go out with Grace. She's my _______.",
+                answer: "ex-girlfriend",
+                options: ["ex-girlfriend", "girlfriend", "wife", "friend"]
+            },
+            {
+                text: "Fiona is my daughter's daughter's daughter. She's my _______.",
+                answer: "great granddaughter",
+                options: ["granddaughter", "great granddaughter", "daughter", "niece"]
+            },
+            {
+                text: "I was married to Graham for four years before we divorced. He's my _______.",
+                answer: "ex-husband",
+                options: ["husband", "ex-husband", "partner", "boyfriend"]
+            },
+            {
+                text: "After my mum and dad got divorced, my dad married Joan. She's my _______.",
+                answer: "stepmother",
+                options: ["stepmother", "mother", "aunt", "mother-in-law"]
+            },
+            {
+                text: "Chris and I have the same father but different mothers. He's my _______.",
+                answer: "half brother",
+                options: ["brother", "half brother", "stepbrother", "cousin"]
+            },
+            {
+                text: "My parents aren't religious, so I don't have any _______.",
+                answer: "godparents",
+                options: ["godparents", "relatives", "siblings", "cousins"]
+            },
+            {
+                text: "I married Paul. Carl is Paul's son by his first wife. He's my _______.",
+                answer: "stepson",
+                options: ["son", "stepson", "nephew", "grandson"]
+            },
+            // Vocabulary Questions
+            {
+                text: "The priest gave his _______ to the newlyweds.",
+                answer: "blessing",
+                options: ["blessing", "bless", "blesses", "blessed"]
+            },
+            {
+                text: "In England, when someone sneezes, it's polite to say, '_______ you.'",
+                answer: "bless",
+                options: ["bless", "blessing", "blessed", "blesses"]
+            },
+            {
+                text: "I've never met anyone with such a _______ family!",
+                answer: "massive",
+                options: ["massive", "masses", "mass", "massed"]
+            },
+            {
+                text: "There are three _______ at the church on Sundays: 7 a.m., 11 a.m. and 7 p.m.",
+                answer: "masses",
+                options: ["masses", "massive", "mass", "massively"]
+            },
+            {
+                text: "Only _______ inevitably miss out on the pluses of having brothers and sisters.",
+                answer: "children",
+                options: ["children", "childish", "child", "childhood"]
+            },
+            {
+                text: "Do you have to be so _______? Grow up!",
+                answer: "childish",
+                options: ["childish", "children", "child", "childhood"]
+            },
+            {
+                text: "My nephew works as a _______ at the Grand Hotel.",
+                answer: "receptionist",
+                options: ["receptionist", "receptions", "receptor", "receiving"]
+            },
+            {
+                text: "My brother's band often play at birthday parties and wedding _______.",
+                answer: "receptions",
+                options: ["receptions", "receptionist", "receiving", "receptive"]
+            },
+            {
+                text: "I've only met her once. She's a _______ relative.",
+                answer: "distant",
+                options: ["distant", "distance", "distantly", "distancing"]
+            },
+            {
+                text: "The huge _______ between London and Auckland means flights take almost twenty-four hours.",
+                answer: "distance",
+                options: ["distance", "distant", "distantly", "distancing"]
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Shuffle questions at start
+        questions.sort(() => Math.random() - 0.5);
+
+        function startQuiz() {
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('quizScreen').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('quizScreen').style.opacity = '1';
+            }, 100);
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const question = questions[currentQuestion];
+            document.getElementById('question').textContent = question.text;
+            
+            // Shuffle options for this question
+            const shuffledOptions = shuffleArray([...question.options]);
+            
+            const optionsHtml = shuffledOptions.map(option => 
+                `<div class="option" onclick="selectOption(this, '${option}')">${option}</div>`
+            ).join('');
+            
+            document.getElementById('options').innerHTML = optionsHtml;
+            document.getElementById('nextBtn').style.display = 'none';
+            updateProgress();
+        }
+
+        function selectOption(element, selected) {
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => {
+                option.onclick = null;
+                if (option === element) {
+                    if (selected === questions[currentQuestion].answer) {
+                        option.classList.add('correct');
+                        score++;
+                    } else {
+                        option.classList.add('wrong');
+                        options.forEach(opt => {
+                            if (opt.textContent === questions[currentQuestion].answer) {
+                                opt.classList.add('correct');
+                            }
+                        });
+                    }
+                }
+            });
+            
+            document.getElementById('nextBtn').style.display = 'inline-block';
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            const percentage = (score / questions.length) * 100;
+            let feedback;
+            if (percentage >= 90) {
+                feedback = "Excellent! You have a great command of English!";
+            } else if (percentage >= 70) {
+                feedback = "Good job! You have a solid understanding of English.";
+            } else if (percentage >= 50) {
+                feedback = "Not bad! Keep practicing to improve.";
+            } else {
+                feedback = "Keep studying! Practice makes perfect.";
+            }
+
+            document.getElementById('quizScreen').innerHTML = `
+                <div class="results">
+                    <h2 class="score">Score: ${score}/${questions.length} (${percentage}%)</h2>
+                    <p class="feedback">${feedback}</p>
+                    <button class="start-btn" onclick="location.reload()">Try Again</button>
+                </div>
+            `;
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+        }
+    </script>
+</body>
+</html>
