@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --success: #4bb543;
+            --danger: #dc3545;
+            --light: #f8f9fa;
+            --dark: #212529;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .start-screen {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+        }
+        
+        .start-screen h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .quiz-screen {
+            display: none;
+            opacity: 0;
+            transition: all 0.5s ease;
+            padding: 30px;
+        }
+        
+        .reading-text {
+            background: var(--light);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            line-height: 1.8;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .question-container {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .question {
+            font-size: 1.2em;
+            color: var(--dark);
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .option {
+            padding: 15px 20px;
+            margin: 10px 0;
+            background: var(--light);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .option:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+        
+        .correct {
+            background: #d4edda;
+            color: #155724;
+            border-color: #c3e6cb;
+            transform: translateX(5px);
+        }
+        
+        .wrong {
+            background: #f8d7da;
+            color: #721c24;
+            border-color: #f5c6cb;
+            transform: translateX(5px);
+        }
+        
+        .next-btn {
+            display: none;
+            padding: 12px 30px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+        }
+        
+        .next-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .progress {
+            height: 6px;
+            background: #e9ecef;
+            margin-top: 30px;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            width: 0;
+            transition: width 0.5s ease;
+        }
+        
+        .results {
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .answers {
+            text-align: left;
+            margin-top: 30px;
+            background: var(--light);
+            padding: 25px;
+            border-radius: 15px;
+        }
+        
+        .start-btn {
+            padding: 15px 40px;
+            background: white;
+            color: var(--primary);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.2em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .start-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .exercise-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            background: var(--light);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tab.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .exercise {
+            display: none;
+        }
+        
+        .exercise.active {
+            display: block;
+        }
+        
+        strong {
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="start-screen" id="startScreen">
+            <h1>English Text Completion Quiz</h1>
+            <p>Test your understanding with two different exercises!</p>
+            <button class="start-btn" onclick="startQuiz()">Start Quiz</button>
+        </div>
+
+        <div class="quiz-screen" id="quizScreen">
+            <div class="exercise-tabs">
+                <div class="tab active" onclick="switchExercise(1)">Exercise 1</div>
+                <div class="tab" onclick="switchExercise(2)">Exercise 2</div>
+            </div>
+
+            <div class="exercise active" id="exercise1">
+                <div class="reading-text">
+                    <h3>Complete the pairs of sentences with the words in bold.</h3>
+                    <p>0. <strong>concert, party</strong></p>
+                    <p>a. On 23 October, Ether Music Club is putting on a rock _____ featuring local bands.</p>
+                    <p>b. Are we putting on a _____ to celebrate Mum's fiftieth birthday?</p>
+    
+                    <p>1. <strong>frog, lump</strong></p>
+                    <p>a. Do you happen to have a mint or a throat sweet? I've got a _____ in my throat.</p>
+                    <p>b. Though it was Sarah's decision, she still had a _____ in her throat as she told Sara it was over.</p>
+    
+                    <p>2. <strong>motion, toast</strong></p>
+                    <p>a. I'd like to propose a _____ to love, life, health and happiness.</p>
+                    <p>b. Parliament proposed a _____ yesterday to ban advertising on buildings in the city centre.</p>
+    
+                    <p>3. <strong>fool, fuss</strong></p>
+                    <p>a. Joseph made a complete _____ of himself trying to break-dance at the graduation ceremony.</p>
+                    <p>b. Miss Havestock's former students made a _____ of her new baby when she brought him into class to say hello.</p>
+    
+                    <p>4. <strong>count, sight</strong></p>
+                    <p>a. It's easy to lose _____ of the fact that your problems are minor compared to what some young people have to cope with.</p>
+                    <p>b. Fay had lost _____ of how many lessons she'd skipped. According to her report, it was twelve.</p>
+    
+                    <p>5. <strong>gifts, praise</strong></p>
+                    <p>a. Sean was showered with _____ in the local newspaper after raising nearly £5,000 for charity.</p>
+                    <p>b. Ellie was used to being showered with _____ by her generous boyfriend.</p>
+                </div>
+            </div>
+
+            <div class="exercise" id="exercise2">
+                <div class="reading-text">
+                    <h3>Complete the sentences with the correct words</h3>
+                    
+                    <p>1.</p>
+                    <p>A: The girls are really _____ by their dad. If Mum says no, they go ask Dad, knowing he will probably say yes.</p>
+                    <p>B: I know. I think both parents should try to give out the same message. It may be tricky sometimes, but it's w_____ in the long term.</p>
+
+                    <p>2.</p>
+                    <p>A: Eve just loves being the c_____ of a_____. She was actually pleased when she broke her arm because of the fuss that everyone made of her.</p>
+                    <p>B: I know. It's like it was the h_____ of her year! I can't see anything exciting about having to wear a plaster for six weeks.</p>
+
+                    <p>3.</p>
+                    <p>A: The travel agent told me that seeing the Northern Lights was a o_____ in a l_____.</p>
+                    <p>B: And?</p>
+                    <p>A: Well, we paid hundreds of pounds, walked for hours and sat in the freezing cold for two nights without seeing so much as a single star. Not exactly the t_____ of my l_____. I mean, I've had more fun asleep!</p>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question" id="question"></div>
+                <div class="options" id="options"></div>
+            </div>
+            <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Next Question</button>
+            <div class="progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentQuestion = 0;
+        let score = 0;
+        let currentExercise = 1;
+
+        const questions = [
+            {
+                text: "For pair 0, which word goes with sentence a?",
+                answer: "concert",
+                options: ["concert", "party"]
+            },
+            {
+                text: "For pair 0, which word goes with sentence b?",
+                answer: "party",
+                options: ["concert", "party"]
+            },
+            {
+                text: "For pair 1, which word goes with sentence a?",
+                answer: "lump",
+                options: ["frog", "lump"]
+            },
+            {
+                text: "For pair 1, which word goes with sentence b?",
+                answer: "lump",
+                options: ["frog", "lump"]
+            },
+            {
+                text: "For pair 2, which word goes with sentence a?",
+                answer: "toast",
+                options: ["motion", "toast"]
+            },
+            {
+                text: "For pair 2, which word goes with sentence b?",
+                answer: "motion",
+                options: ["motion", "toast"]
+            },
+            {
+                text: "For pair 3, which word goes with sentence a?",
+                answer: "fool",
+                options: ["fool", "fuss"]
+            },
+            {
+                text: "For pair 3, which word goes with sentence b?",
+                answer: "fuss",
+                options: ["fool", "fuss"]
+            },
+            {
+                text: "For pair 4, which word goes with sentence a?",
+                answer: "sight",
+                options: ["count", "sight"]
+            },
+            {
+                text: "For pair 4, which word goes with sentence b?",
+                answer: "count",
+                options: ["count", "sight"]
+            },
+            {
+                text: "For pair 5, which word goes with sentence a?",
+                answer: "praise",
+                options: ["gifts", "praise"]
+            },
+            {
+                text: "For pair 5, which word goes with sentence b?",
+                answer: "gifts",
+                options: ["gifts", "praise"]
+            }
+        ];
+
+        const exercise2Questions = [
+            {
+                text: "What is the answer for 1A?",
+                answer: "spoilt",
+                options: ["spoilt", "loved", "treated", "pampered"]
+            },
+            {
+                text: "What is the answer for 1B (w___)?",
+                answer: "worth",
+                options: ["worth", "worse", "wrong", "while"]
+            },
+            {
+                text: "What is the answer for 2A (c_____ of a_____)?",
+                answer: "centre of attention",
+                options: ["centre of attention", "core of attention", "cause of action", "centre of activity"]
+            },
+            {
+                text: "What is the answer for 2B (h_____)?",
+                answer: "highlight",
+                options: ["highlight", "height", "highest", "happening"]
+            },
+            {
+                text: "What is the answer for 3A (o_____ in a l_____)?",
+                answer: "once in a lifetime",
+                options: ["once in a lifetime", "only in life", "one in life", "often in life"]
+            },
+            {
+                text: "What is the answer for 3A (t_____ of my l_____)?",
+                answer: "time of my life",
+                options: ["time of my life", "trip of my life", "tale of my life", "talk of my life"]
+            }
+        ];
+
+        function getCurrentQuestions() {
+            return currentExercise === 1 ? questions : exercise2Questions;
+        }
+
+        function startQuiz() {
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('quizScreen').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('quizScreen').style.opacity = '1';
+            }, 100);
+            loadQuestion();
+        }
+
+        function switchExercise(exerciseNum) {
+            document.querySelectorAll('.exercise').forEach(ex => ex.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            
+            document.getElementById(`exercise${exerciseNum}`).classList.add('active');
+            document.querySelector(`.tab:nth-child(${exerciseNum})`).classList.add('active');
+            
+            currentExercise = exerciseNum;
+            currentQuestion = 0;
+            score = 0;
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+              const currentQuestions = getCurrentQuestions();
+              if (currentQuestion >= currentQuestions.length) {
+                  showResults();
+                  return;
+              }
+              const question = currentQuestions[currentQuestion];
+              document.getElementById('question').textContent = question.text;
+              
+              const optionsHtml = question.options.map(option => 
+                  `<div class="option" onclick="selectOption(this, '${option}')">${option}</div>`
+              ).join('');
+              
+              document.getElementById('options').innerHTML = optionsHtml;
+              document.getElementById('nextBtn').style.display = 'none';
+              updateProgress();
+          }
+
+          function updateProgress() {
+              const currentQuestions = getCurrentQuestions();
+              const progress = ((currentQuestion + 1) / currentQuestions.length) * 100;
+              document.getElementById('progressBar').style.width = `${progress}%`;
+          }
+
+          function selectOption(element, selected) {
+              const currentQuestions = getCurrentQuestions();
+              const options = document.querySelectorAll('.option');
+              options.forEach(option => {
+                  option.onclick = null;
+                  if (option === element) {
+                      if (selected === currentQuestions[currentQuestion].answer) {
+                          option.classList.add('correct');
+                          score++;
+                      } else {
+                          option.classList.add('wrong');
+                          options.forEach(opt => {
+                              if (opt.textContent === currentQuestions[currentQuestion].answer) {
+                                  opt.classList.add('correct');
+                              }
+                          });
+                      }
+                  }
+              });
+              
+              document.getElementById('nextBtn').style.display = 'inline-block';
+          }
+
+          function nextQuestion() {
+              currentQuestion++;
+              const currentQuestions = getCurrentQuestions();
+              if (currentQuestion < currentQuestions.length) {
+                  loadQuestion();
+              } else {
+                  showResults();
+              }
+          }
+
+          function showResults() {
+              const currentQuestions = getCurrentQuestions();
+              const percentage = (score / currentQuestions.length) * 100;
+              const feedback = percentage >= 80 ? "Excellent!" : 
+                             percentage >= 60 ? "Good job!" : 
+                             percentage >= 40 ? "Keep practicing!" : 
+                             "You might want to review the material.";
+
+              let answersHTML = '';
+              if (currentExercise === 1) {
+                  answersHTML = `
+                      <p>0. concert (a), party (b)</p>
+                      <p>1. lump (a), lump (b)</p>
+                      <p>2. toast (a), motion (b)</p>
+                      <p>3. fool (a), fuss (b)</p>
+                      <p>4. sight (a), count (b)</p>
+                      <p>5. praise (a), gifts (b)</p>
+                  `;
+              } else {
+                  answersHTML = `
+                      <p>1A. spoilt</p>
+                      <p>1B. worth</p>
+                      <p>2A. centre of attention</p>
+                      <p>2B. highlight</p>
+                      <p>3A. once in a lifetime</p>
+                      <p>3B. time of my life</p>
+                  `;
+              }
+
+              document.getElementById('quizScreen').innerHTML = `
+                  <div class="results">
+                      <h2>Quiz Complete!</h2>
+                      <p>Your score: ${score}/${currentQuestions.length} (${percentage.toFixed(1)}%)</p>
+                      <p>${feedback}</p>
+                      <div class="answers">
+                          <h3>Correct Answers:</h3>
+                          ${answersHTML}
+                      </div>
+                      <button class="start-btn" onclick="location.reload()">Try Again</button>
+                  </div>
+              `;
+          }
+      </script>
+  </body>
+  </html>
