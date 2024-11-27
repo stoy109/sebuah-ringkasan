@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Reading Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            min-height: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            text-align: center;
+        }
+
+        .start-screen {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            padding: 20px;
+        }
+
+        .reading-text {
+            color: #fff;
+            text-align: left;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .title {
+            color: #fff;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .subtitle {
+            color: #fff;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 0.3s;
+        }
+
+        .start-btn {
+            padding: 15px 40px;
+            font-size: 1.2em;
+            background: #00ff88;
+            border: none;
+            border-radius: 50px;
+            color: #1e3c72;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 0.5s;
+        }
+
+        .quiz-screen {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .question-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            color: #fff;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .options {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .option {
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+        }
+
+        .option:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(0, 255, 0, 0.2);
+            border-color: #00ff88;
+        }
+
+        .option.wrong {
+            background: rgba(255, 0, 0, 0.2);
+            border-color: #ff4444;
+        }
+
+        .results {
+            color: #fff;
+            text-align: center;
+        }
+
+        .score {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #00ff88;
+        }
+
+        .feedback {
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+
+        .answers {
+            color: #ff4444;
+            text-align: left;
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .progress {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: #00ff88;
+            width: 0%;
+            transition: width 0.5s;
+            border-radius: 2px;
+        }
+
+        .next-btn {
+            padding: 10px 30px;
+            font-size: 1.1em;
+            background: #00ff88;
+            border: none;
+            border-radius: 25px;
+            color: #1e3c72;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: none;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+  <div class="container">
+      <div class="start-screen" id="startScreen">
+          <h1 class="title">English Reading Quiz</h1>
+          <p class="subtitle">Test your understanding!</p>
+          <button class="start-btn" onclick="startQuiz()">Start Quiz</button>
+      </div>
+
+      <div class="quiz-screen" id="quizScreen">
+          <div class="reading-text">
+              <!-- First Text -->
+              <h2>Globally successful lawyer Amal Alamuddin marries... an actor</h2>
+              <p>
+                  Amal Alamuddin, a high-profile barrister in international refugee and human rights law, has made the unusual move for a professional in her field of marrying an actor. Alamuddin and her husband, whose name is George, were married in Venice, not by a _____(1)_____, but by the couple's friend Walter Veltroni, the ex-mayor of Rome. The _____(2)_____ was watched by the _____(3)_____ families of the bride and groom, as well as close friends. It was followed by a luxurious _____(4)_____ at the seven-star Aman hotel. With several hundred people on the guest list, this was certainly not a small _____(5)_____. Lasting several days, the celebrations gave guests the chance to make the most of beautiful Venice and visit its galleries, museums, chapels and _____(6)_____.
+              </p>
+              
+              <!-- Second Text -->
+              <h2>Text Completion Exercise</h2>
+              <p>
+                  On Tony's last night of freedom, his wife _____(7)_____ (3) on a party for him at Hotel La Siciliana. Friends and 'business partners' _____(8)_____ (8) him with gifts and relatives. A few of him. Brothers, uncles and cousins reminded him 'what a guy' he was and that 'few years is nothing.' Sisters and aunts with lumps in their _____(9)_____ (7) and tears in their eyes checked constantly whether he was hungry or thirsty. After dinner, Tony stood at the head of the table, raised his glass and _____(10)_____ (8) a toast. He thanked his wife and family for the party and told them how much he would miss them. Then, addressing his many 'associates', he reminded them, 'Though I'll be away for a few years, gentlemen, don't _____(11)_____ (4) sight of the fact that I am, and will continue to be, the Boss.'
+              </p>
+          </div>
+          <div class="question-container">
+              <div class="question" id="question"></div>
+              <div class="options" id="options"></div>
+          </div>
+          <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Next Question</button>
+          <div class="progress">
+              <div class="progress-bar" id="progressBar"></div>
+          </div>
+      </div>
+  </div>
+
+  <script>
+      const questions = [
+          // First text questions
+          {
+              text: "What goes in blank (1)?",
+              answer: "priest",
+              options: ["priest", "mayor", "judge", "official"]
+          },
+          {
+              text: "What goes in blank (2)?",
+              answer: "ceremony",
+              options: ["ceremony", "wedding", "event", "party"]
+          },
+          {
+              text: "What goes in blank (3)?",
+              answer: "immediate/extended",
+              options: ["immediate/extended", "close/distant", "small/large", "local/foreign"]
+          },
+          {
+              text: "What goes in blank (4)?",
+              answer: "reception",
+              options: ["reception", "party", "celebration", "dinner"]
+          },
+          {
+              text: "What goes in blank (5)?",
+              answer: "gathering",
+              options: ["gathering", "party", "wedding", "celebration"]
+          },
+          {
+              text: "What goes in blank (6)?",
+              answer: "shrines",
+              options: ["shrines", "churches", "monuments", "palaces"]
+          },
+          // Second text questions
+          {
+              text: "What is the 3-letter word for blank (7)?",
+              answer: "put",
+              options: ["put", "set", "ran", "got"]
+          },
+          {
+              text: "What is the 8-letter word for blank (8)?",
+              answer: "showered",
+              options: ["showered", "provided", "supplied", "bestowed"]
+          },
+          {
+              text: "What is the 7-letter word for blank (9)?",
+              answer: "throats",
+              options: ["throats", "mouths", "voices", "hearts"]
+          },
+          {
+              text: "What is the 8-letter word for blank (10)?",
+              answer: "proposed",
+              options: ["proposed", "declared", "announced", "prepared"]
+          },
+          {
+              text: "What is the 4-letter word for blank (11)?",
+              answer: "lose",
+              options: ["lose", "miss", "drop", "skip"]
+          }
+      ];
+
+      let currentQuestion = 0;
+      let score = 0;
+
+      function startQuiz() {
+          document.getElementById('startScreen').style.display = 'none';
+          document.getElementById('quizScreen').style.display = 'block';
+          setTimeout(() => {
+              document.getElementById('quizScreen').style.opacity = '1';
+          }, 100);
+          loadQuestion();
+      }
+
+      function loadQuestion() {
+          const question = questions[currentQuestion];
+          document.getElementById('question').textContent = question.text;
+          
+          const shuffledOptions = shuffleArray([...question.options]);
+          const optionsHtml = shuffledOptions.map(option => 
+              `<div class="option" onclick="selectOption(this, '${option}')">${option}</div>`
+          ).join('');
+          
+          document.getElementById('options').innerHTML = optionsHtml;
+          document.getElementById('nextBtn').style.display = 'none';
+          updateProgress();
+      }
+
+      function selectOption(element, selected) {
+          const options = document.querySelectorAll('.option');
+          options.forEach(option => {
+              option.onclick = null;
+              if (option === element) {
+                  if (selected === questions[currentQuestion].answer) {
+                      option.classList.add('correct');
+                      score++;
+                  } else {
+                      option.classList.add('wrong');
+                      options.forEach(opt => {
+                          if (opt.textContent === questions[currentQuestion].answer) {
+                              opt.classList.add('correct');
+                          }
+                      });
+                  }
+              }
+          });
+          
+          document.getElementById('nextBtn').style.display = 'inline-block';
+      }
+
+      function nextQuestion() {
+          currentQuestion++;
+          if (currentQuestion < questions.length) {
+              loadQuestion();
+          } else {
+              showResults();
+          }
+      }
+
+      function showResults() {
+          const percentage = (score / questions.length) * 100;
+          let feedback;
+          if (percentage >= 90) {
+              feedback = "Excellent! Your comprehension is outstanding!";
+          } else if (percentage >= 70) {
+              feedback = "Good job! You have a good understanding of the texts.";
+          } else if (percentage >= 50) {
+              feedback = "Not bad! Keep practicing your reading skills.";
+          } else {
+              feedback = "Keep studying! Practice makes perfect.";
+          }
+
+          document.getElementById('quizScreen').innerHTML = `
+              <div class="results">
+                  <h2 class="score">Score: ${score}/${questions.length} (${percentage}%)</h2>
+                  <p class="feedback">${feedback}</p>
+                  <div class="answers">
+                      <h3>Correct Answers:</h3>
+                      <h4>First Text:</h4>
+                      <p>1. priest</p>
+                      <p>2. ceremony</p>
+                      <p>3. immediate/extended</p>
+                      <p>4. reception</p>
+                      <p>5. gathering</p>
+                      <p>6. shrines</p>
+                      <h4>Second Text:</h4>
+                      <p>7. put</p>
+                      <p>8. showered</p>
+                      <p>9. throats</p>
+                      <p>10. proposed</p>
+                      <p>11. lose</p>
+                  </div>
+                  <button class="start-btn" onclick="location.reload()">Try Again</button>
+              </div>
+          `;
+      }
+
+      function shuffleArray(array) {
+          for (let i = array.length - 1; i > 0; i--) {
+              const j = Math.floor(Math.random() * (i + 1));
+              [array[i], array[j]] = [array[j], array[i]];
+          }
+          return array;
+      }
+
+      function updateProgress() {
+          const progress = ((currentQuestion + 1) / questions.length) * 100;
+          document.getElementById('progressBar').style.width = `${progress}%`;
+      }
+  </script>
+</body>
+</html>
