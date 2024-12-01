@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaya Lorentz Interactive</title>
+    <style>
+        :root {
+            --primary: #2196F3;
+            --secondary: #FFC107;
+            --dark: #212121;
+            --light: #f3f3f3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: var(--light);
+            overflow-x: hidden;
+        }
+
+        .loader-wrapper {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: var(--dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .magnetic-loader {
+            width: 100px;
+            height: 100px;
+            border: 8px solid var(--primary);
+            border-radius: 50%;
+            position: relative;
+            animation: magnetic 2s linear infinite;
+        }
+
+        .magnetic-loader::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--secondary);
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: particle 2s linear infinite;
+        }
+
+        @keyframes magnetic {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes particle {
+            0% { left: -20px; }
+            50% { left: 100px; }
+            100% { left: -20px; }
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 4px;
+            background: #ddd;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .title {
+            color: var(--dark);
+            text-align: center;
+            margin: 40px 0;
+            font-size: 2.5em;
+            animation: titleFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes titleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transform: translateX(-100%);
+            animation: slideIn 0.5s forwards;
+        }
+
+        @keyframes slideIn {
+            to { transform: translateX(0); }
+        }
+
+        .image-holder {
+            width: 100%;
+            height: 300px;
+            background: #eee;
+            margin: 20px 0;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2em;
+            color: #666;
+            overflow: hidden;
+        }
+
+        .image-holder img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .formula {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-family: 'Times New Roman', serif;
+            overflow-x: auto;
+        }
+
+        /* Perbaikan styling untuk list */
+        ul {
+            padding-left: 20px;
+            margin: 10px 0;
+            list-style-position: outside;
+        }
+
+        li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+            padding-right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .title {
+                font-size: 2em;
+            }
+
+            .card {
+                padding: 15px;
+            }
+
+            .image-holder {
+                height: 200px;  /* Mengurangi tinggi gambar pada mobile */
+            }
+
+            /* Penyesuaian tambahan untuk list pada mobile */
+            ul {
+                padding-left: 15px;
+            }
+
+            li {
+                font-size: 0.95em;
+                margin-bottom: 6px;
+            }
+
+            /* Penyesuaian untuk formula pada mobile */
+            .formula {
+                font-size: 0.9em;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader-wrapper">
+        <div class="magnetic-loader"></div>
+    </div>
+
+    <div class="progress-container">
+        <div class="progress-bar"></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Gaya Lorentz</h1>
+
+        <div class="card">
+            <h2>Apa yang Terjadi pada Kawat Berarus dalam Medan Magnet?</h2>
+            <div class="image-holder">
+                <img src="/api/placeholder/400/300" alt="Kawat Berarus dalam Medan Magnet">
+            </div>
+            <p>Ketika kawat yang dialiri arus listrik ditempatkan dalam medan magnet, akan muncul gaya yang disebut Gaya Lorentz.</p>
+            <ul>
+                <li>Arah Medan Magnet: Dari kutub utara ke kutub selatan magnet</li>
+                <li>Arah Arus Listrik: Dari kutub positif ke kutub negatif baterai</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Aturan Tangan Kanan</h2>
+            <div class="image-holder">
+                <img src="https://hotelier.id/studi/wp-content/uploads/2023/08/kaidah-tangan-kanan-pada-gaya-lorentz.png" alt="Aturan Tangan Kanan">
+            </div>
+            <p>Arah gaya Lorentz dapat ditentukan dengan aturan tangan kanan:</p>
+            <ul>
+                <li>B: arah medan magnet</li>
+                <li>I: arah arus listrik</li>
+                <li>F: arah gaya Lorentz</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Rumus Gaya Lorentz</h2>
+            <div class="formula">
+                F = B · i · l · sin(θ)
+            </div>
+            <p>Dimana:</p>
+            <ul>
+                <li>F = Gaya Lorentz (Newton)</li>
+                <li>B = Kuat medan magnet (Tesla)</li>
+                <li>i = Kuat arus listrik (Ampere)</li>
+                <li>l = Panjang kawat (meter)</li>
+                <li>θ = Sudut antara arah arus dan medan magnet</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            setTimeout(() => {
+                document.querySelector('.loader-wrapper').style.display = 'none';
+                document.querySelector('.container').classList.add('visible');
+            }, 2000);
+        }
+
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.querySelector(".progress-bar").style.width = scrolled + "%";
+        }
+
+        const cards = document.querySelectorAll('.card');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'slideIn 0.5s forwards';
+                }
+            });
+        });
+
+        cards.forEach(card => observer.observe(card));
+    </script>
+</body>
+</html>

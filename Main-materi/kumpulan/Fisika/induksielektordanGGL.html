@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Induksi Elektromagnetik dan GGL</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #262626;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 10px;
+            background: #333;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #00ff00, #00ffff);
+            transition: width 0.5s ease-out;
+            animation: glow 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 5px #00ff00;
+            }
+            to {
+                box-shadow: 0 0 20px #00ffff;
+            }
+        }
+
+        .loading-text {
+            color: #fff;
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease-out;
+        }
+
+        h1, h2 {
+            color: #00ffff;
+            margin: 20px 0;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .formula {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            backdrop-filter: blur(5px);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .formula:hover {
+            transform: scale(1);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .note {
+            background: rgba(0, 255, 0, 0.1);
+            padding: 15px;
+            border-left: 4px solid #00ff00;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 10px;
+            }
+            
+            .formula {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader">
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+        <div class="loading-text">Loading...</div>
+    </div>
+
+    <div class="content">
+        <h1>Induksi Elektromagnetik dan GGL</h1>
+
+        <div class="formula">
+            <h2>Faktor yang Mempengaruhi GGL</h2>
+            <p>• Kecepatan perubahan fluks magnetik - semakin cepat perubahan, semakin besar GGL</p>
+            <p>• Jumlah lilitan loop/kumparan - semakin banyak lilitan, semakin besar GGL</p>
+        </div>
+
+        <div class="formula">
+            <h2>Hukum Faraday</h2>
+            <p>GGL induksi dinyatakan dengan rumus:</p>
+            \[ \varepsilon = N \frac{\Delta \phi}{\Delta t} \]
+            <p>Dimana:</p>
+            <p>ε = GGL (Volt)</p>
+            <p>N = Jumlah lilitan</p>
+            <p>Δφ/Δt = Perubahan fluks magnetik per waktu (Wb/s)</p>
+        </div>
+
+        <div class="formula">
+            <h2>GGL Maksimum</h2>
+            \[ \varepsilon_m = NBA\omega \]
+            <p>Dimana:</p>
+            <p>N = Jumlah lilitan</p>
+            <p>B = Medan magnet (Tesla)</p>
+            <p>A = Luas loop (m²)</p>
+            <p>ω = Kecepatan sudut (rad/s)</p>
+        </div>
+
+        <div class="formula">
+            <h2>Persamaan Umum GGL</h2>
+            \[ \varepsilon = \varepsilon_m \sin \omega t \]
+        </div>
+
+        <div class="note">
+            <h2>Catatan Penting:</h2>
+            <p>• Konversi luas: cm² ke m² × 10⁻⁴</p>
+            <p>• GGL maksimum saat sudut 90° (sin 90° = 1)</p>
+            <p>• GGL nol saat sudut 0° (sin 0° = 0)</p>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const loader = document.querySelector('.loader');
+            const progress = document.querySelector('.progress');
+            const content = document.querySelector('.content');
+            let width = 0;
+
+            const interval = setInterval(() => {
+                width += 1;
+                progress.style.width = width + '%';
+                
+                if (width >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        loader.style.opacity = '0';
+                        content.style.opacity = '1';
+                        content.style.transform = 'translateY(0)';
+                        setTimeout(() => {
+                            loader.style.display = 'none';
+                        }, 500);
+                    }, 500);
+                }
+            }, 20);
+
+            // Add MathJax configuration
+            window.MathJax = {
+                tex: {
+                    inlineMath: [['\\(', '\\)']],
+                    displayMath: [['\\[', '\\]']]
+                }
+            };
+
+            // Load MathJax
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+            document.head.appendChild(script);
+        };
+    </script>
+</body>
+</html>
