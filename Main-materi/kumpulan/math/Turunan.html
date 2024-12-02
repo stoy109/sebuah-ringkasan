@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Concepts</title>
+    <style>
+        :root {
+            --primary: #4CAF50;
+            --secondary: #2196F3;
+            --accent: #FF4081;
+            --background: #fafafa;
+            --text: #212121;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: var(--background);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        #loader-wrapper {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: var(--background);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s;
+        }
+
+        .progress-container {
+            width: 80%;
+            max-width: 500px;
+            background: #eee;
+            border-radius: 20px;
+            padding: 3px;
+            position: relative;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 20px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 20px;
+            transition: width 0.5s ease-in-out;
+        }
+
+        .loading-text {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: var(--text);
+        }
+
+        .math-symbol {
+            position: absolute;
+            font-size: 2em;
+            opacity: 0;
+            animation: float 3s infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        #content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s;
+        }
+
+        .section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transform: translateX(-100%);
+            transition: transform 0.5s;
+        }
+
+        .section.visible {
+            transform: translateX(0);
+        }
+
+        h2 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .math {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow-x: auto;
+            font-size: 1.1em;
+        }
+
+        @media (max-width: 600px) {
+            .progress-container {
+                width: 90%;
+            }
+            
+            #content {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="loader-wrapper">
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
+        <div class="loading-text">Loading Math Concepts...</div>
+    </div>
+
+    <div id="content">
+        <!-- Content will be dynamically inserted here -->
+    </div>
+
+<script>
+const mathContent = `
+    <div class="section">
+        <h2>4. Definisi Diferensial/Turunan</h2>
+        <p><strong>Diferensial</strong> atau <strong>turunan</strong> dari suatu fungsi menggambarkan tingkat perubahan fungsi tersebut terhadap perubahan variabel bebasnya. Secara matematis, turunan dari fungsi \\( y = f(x) \\) dinyatakan sebagai \\( f'(x) \\) atau \\( \\frac{dy}{dx} \\). Turunan menunjukkan seberapa cepat nilai \\( y \\) berubah terhadap perubahan kecil pada \\( x \\).</p>
+    </div>
+
+    <div class="section">
+        <h2>5. Definisi Limit Fungsi</h2>
+        <p><strong>Limit fungsi</strong> adalah nilai yang didekati oleh suatu fungsi ketika variabel independennya mendekati suatu titik tertentu. Secara formal, jika \\( f(x) \\) mendekati \\( L \\) ketika \\( x \\) mendekati \\( a \\), maka ditulis sebagai \\( \\lim_{x \\to a} f(x) = L \\).</p>
+    </div>
+
+    <div class="section">
+        <h2>6. Mencari Limit Metode Substitusi</h2>
+        <p>Metode substitusi mencari limit dengan mengganti variabel \\( x \\) dengan nilai yang mendekati titik tertentu. Jika substitusi langsung menghasilkan nilai yang terdefinisi, maka itulah limitnya.</p>
+    </div>
+
+    <div class="section">
+        <h2>7. Limit Metode Pemfaktoran</h2>
+        <p>Metode pemfaktoran digunakan jika substitusi menghasilkan bentuk tak tentu seperti \\( 0/0 \\). Fungsi difaktorkan untuk menyederhanakan bentuknya, kemudian dilakukan substitusi ulang.</p>
+    </div>
+
+    <div class="section">
+        <h2>8. Limit Perkalian Sekawan</h2>
+        <p>Metode perkalian sekawan digunakan untuk menyelesaikan limit yang melibatkan bentuk akar. Fungsi dikalikan dengan sekawannya untuk menghilangkan bentuk irasional, lalu disederhanakan dan disubstitusikan.</p>
+    </div>
+
+    <div class="section">
+        <h2>9. Mencari Turunan (Polynomial)</h2>
+        <p>Untuk mencari turunan polinomial, gunakan aturan dasar turunan: jika \\( f(x) = ax^n \\), maka turunan pertama adalah \\( f'(x) = nax^{n-1} \\).</p>
+    </div>
+
+    <div class="section">
+        <h2>10. Turunan Menggunakan Aturan Pembagian</h2>
+        <p>Aturan pembagian untuk turunan menyatakan bahwa jika \\( F(x) = \\frac{f(x)}{g(x)} \\), maka turunan dari \\( F(x) \\) adalah:</p>
+        <div class="math">\\( F'(x) = \\frac{f'(x)g(x) - g'(x)f(x)}{[g(x)]^2} \\)</div>
+        <p>dengan syarat \\( g(x) \\neq 0 \\).</p>
+    </div>
+
+    <div class="section">
+        <h2>11. Turunan Menggunakan Aturan Perkalian</h2>
+        <p>Aturan perkalian untuk turunan menyatakan bahwa jika \\( y = u(x)v(x) \\), maka turunannya adalah:</p>
+        <div class="math">\\( y' = u'(x)v(x) + u(x)v'(x) \\)</div>
+        <p>Ini digunakan ketika dua fungsi dikalikan bersama-sama.</p>
+    </div>
+`;
+
+const mathSymbols = ['∫', '∑', '∂', '√', '∞', 'π', '±'];
+let progress = 0;
+const progressBar = document.querySelector('.progress-bar');
+const loaderWrapper = document.querySelector('#loader-wrapper');
+const content = document.querySelector('#content');
+
+function createFloatingSymbol() {
+    const symbol = document.createElement('div');
+    symbol.className = 'math-symbol';
+    symbol.textContent = mathSymbols[Math.floor(Math.random() * mathSymbols.length)];
+    symbol.style.left = Math.random() * window.innerWidth + 'px';
+    loaderWrapper.appendChild(symbol);
+    
+    setTimeout(() => {
+        symbol.remove();
+    }, 3000);
+}
+
+function updateProgress() {
+    if (progress < 100) {
+        progress += Math.random() * 15;
+        progress = Math.min(progress, 100);
+        progressBar.style.width = progress + '%';
+        
+        if (progress < 100) {
+            createFloatingSymbol();
+            setTimeout(updateProgress, 200);
+        } else {
+            setTimeout(() => {
+                loaderWrapper.style.opacity = '0';
+                setTimeout(() => {
+                    loaderWrapper.style.display = 'none';
+                    content.style.opacity = '1';
+                    content.style.transform = 'translateY(0)';
+                    content.innerHTML = mathContent;
+                    
+                    const sections = document.querySelectorAll('.section');
+                    sections.forEach((section, index) => {
+                        setTimeout(() => {
+                            section.classList.add('visible');
+                        }, index * 200);
+                    });
+
+                    // Trigger MathJax rendering
+                    if (window.MathJax) {
+                        window.MathJax.typeset();
+                    }
+                }, 500);
+            }, 500);
+        }
+    }
+}
+
+window.onload = () => {
+    setTimeout(updateProgress, 500);
+};
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</body>
+</html>
