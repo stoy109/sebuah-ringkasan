@@ -9,22 +9,19 @@
             margin: 0;  
             padding: 0;  
             box-sizing: border-box;  
-            user-select: none;  
-            -webkit-user-select: none;  
-            -moz-user-select: none;  
-            -ms-user-select: none;  
+            -webkit-tap-highlight-color: transparent;
         }  
 
         body {  
             font-family: 'Segoe UI', sans-serif;  
             background: linear-gradient(45deg, #1a1a1a, #2a2a2a);  
             color: #fff;  
-            min-height: 100vh;  
-            overflow-x: hidden;  
-            position: relative;  
+            min-height: 100vh;
+            position: relative;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }  
 
-        /* Overlay to prevent screenshots */  
         #screenshot-overlay {  
             position: fixed;  
             top: 0;  
@@ -43,7 +40,6 @@
             mix-blend-mode: overlay;  
         }  
 
-        /* Rest of the previous styles remain the same */  
         #loader {  
             position: fixed;  
             top: 0;  
@@ -56,24 +52,12 @@
             justify-content: center;  
             align-items: center;  
             z-index: 1000;  
+            transition: opacity 0.5s ease;
         }  
 
-        #loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #1a1a1a;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
         .progress-container {
-            width: 300px;
+            width: 80%;
+            max-width: 300px;
             height: 20px;
             background: #333;
             border-radius: 10px;
@@ -89,12 +73,16 @@
         }
 
         .content {
+            width: 100%;
             max-width: 800px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1rem;
             opacity: 0;
             transform: translateY(20px);
             transition: all 0.5s ease;
+            position: relative;
+            z-index: 1;
+            touch-action: pan-y pinch-zoom;
         }
 
         .show-content {
@@ -103,11 +91,12 @@
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: #00ff88;
             text-align: center;
             margin-bottom: 2rem;
             text-shadow: 0 0 10px rgba(0,255,136,0.5);
+            padding: 0 10px;
         }
 
         h2 {
@@ -128,6 +117,8 @@
             border-radius: 8px;
             margin: 1rem 0;
             font-family: 'Times New Roman', serif;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .floating-circle {
@@ -138,6 +129,7 @@
             border-radius: 50%;
             pointer-events: none;
             animation: float 10s infinite linear;
+            z-index: 0;
         }
 
         @keyframes float {
@@ -151,7 +143,12 @@
             }
             
             h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
+            }
+
+            .math {
+                padding: 0.75rem;
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -212,96 +209,74 @@
     </div>  
 
     <script>  
-        // Comprehensive protection against screenshots and copying  
         (function() {  
-            // Disable right-click context menu  
-            document.addEventListener('contextmenu', event => event.preventDefault());  
-            
-            // Prevent copy, cut, and select operations  
-            document.addEventListener('keydown', function(event) {  
-                // Prevent Ctrl+C, Ctrl+X, Ctrl+V, Ctrl+A, Ctrl+S, Ctrl+P  
-                if (event.ctrlKey && ['c', 'x', 'v', 'a', 's', 'p'].includes(event.key.toLowerCase())) {  
-                    event.preventDefault();  
-                }  
-                
-                // Prevent Print Screen and F12  
-                if (event.key === 'F12' || event.keyCode === 44) {  
-                    event.preventDefault();  
-                }  
-            });  
+            // Modified touch event handling
+            document.addEventListener('touchstart', function(e) {
+                // Allow scrolling but prevent other touch actions
+                if (e.target.closest('.math, .content')) {
+                    return true;
+                }
+                e.preventDefault();
+            }, { passive: true });
 
-            // Prevent text selection  
-            document.body.style.userSelect = 'none';  
-            document.body.style.webkitUserSelect = 'none';  
-            document.body.style.mozUserSelect = 'none';  
-            document.body.style.msUserSelect = 'none';  
+            // Prevent context menu
+            document.addEventListener('contextmenu', e => e.preventDefault());
 
-            // Prevent developer tools  
-            document.addEventListener('keydown', function(e) {  
-                if (e.keyCode === 123) {  
-                    e.preventDefault();  
-                }  
-                if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) {  
-                    e.preventDefault();  
-                }  
-            });  
+            // Prevent keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey && ['c', 'x', 'v', 'a', 's', 'p'].includes(e.key.toLowerCase())) {
+                    e.preventDefault();
+                }
+                if (e.key === 'F12' || e.keyCode === 44) {
+                    e.preventDefault();
+                }
+            });
 
-            // Detect and prevent screenshots (mobile and desktop)  
-            function preventScreenshot() {  
-                const overlay = document.getElementById('screenshot-overlay');  
-                if (overlay) {  
-                    overlay.style.display = 'block';  
-                    setTimeout(() => {  
-                        overlay.style.display = 'none';  
-                    }, 100);  
-                }  
-            }  
+            // Screenshot prevention
+            function preventScreenshot() {
+                const overlay = document.getElementById('screenshot-overlay');
+                if (overlay) {
+                    overlay.style.display = 'block';
+                    setTimeout(() => {
+                        overlay.style.display = 'none';
+                    }, 100);
+                }
+            }
 
-            // Add multiple screenshot prevention methods  
-            window.addEventListener('blur', preventScreenshot);  
-            
-            // Prevent long press on mobile  
-            document.addEventListener('touchstart', function(e) {  
-                e.preventDefault();  
-            }, { passive: false });  
+            window.addEventListener('blur', preventScreenshot);
 
-            // Prevent drag and drop  
-            document.addEventListener('dragstart', function(e) {  
-                e.preventDefault();  
-            });  
+            // Loading animation
+            let progress = 0;
+            const progressBar = document.getElementById('progress-bar');
+            const loader = document.getElementById('loader');
+            const content = document.querySelector('.content');
 
-            // Loader and content reveal logic (previous implementation)  
-            let progress = 0;  
-            const progressBar = document.getElementById('progress-bar');  
-            const loader = document.getElementById('loader');  
-            const content = document.querySelector('.content');  
+            const loadingInterval = setInterval(() => {
+                progress += Math.random() * 30;
+                if (progress > 100) {
+                    progress = 100;
+                    clearInterval(loadingInterval);
+                    setTimeout(() => {
+                        loader.style.opacity = '0';
+                        setTimeout(() => {
+                            loader.style.display = 'none';
+                            content.classList.add('show-content');
+                        }, 500);
+                    }, 500);
+                }
+                progressBar.style.width = progress + '%';
+            }, 200);
 
-            const loadingInterval = setInterval(() => {  
-                progress += Math.random() * 30;  
-                if (progress > 100) {  
-                    progress = 100;  
-                    clearInterval(loadingInterval);  
-                    setTimeout(() => {  
-                        loader.style.opacity = '0';  
-                        setTimeout(() => {  
-                            loader.style.display = 'none';  
-                            content.classList.add('show-content');  
-                        }, 500);  
-                    }, 500);  
-                }  
-                progressBar.style.width = progress + '%';  
-            }, 200);  
-
-            // Create multiple floating circles  
-            for (let i = 0; i < 3; i++) {  
-                const circle = document.createElement('div');  
-                circle.className = 'floating-circle';  
-                circle.style.left = Math.random() * 100 + 'vw';  
-                circle.style.top = Math.random() * 100 + 'vh';  
-                circle.style.animationDelay = i * -3 + 's';  
-                document.body.appendChild(circle);  
-            }  
+            // Create floating circles
+            for (let i = 0; i < 3; i++) {
+                const circle = document.createElement('div');
+                circle.className = 'floating-circle';
+                circle.style.left = Math.random() * 100 + 'vw';
+                circle.style.top = Math.random() * 100 + 'vh';
+                circle.style.animationDelay = i * -3 + 's';
+                document.body.appendChild(circle);
+            }
         })();  
     </script>  
 </body>  
-</html>  
+</html>
