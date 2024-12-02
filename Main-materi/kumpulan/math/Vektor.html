@@ -1,9 +1,10 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Materi Vektor dalam Matematika</title>
+<!DOCTYPE html>  
+<html lang="id">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Materi Vektor dalam Matematika</title>  
+    <script src="https://cdn.tailwindcss.com"></script>  
     <style>  
         /* Reset and base styles */  
         * {  
@@ -187,6 +188,26 @@
             z-index: 9998;  
             display: none;  
         }  
+
+        table {  
+            width: 100%;  
+            border-collapse: collapse;  
+            margin: 1rem 0;  
+        }  
+        
+        table, th, td {  
+            border: 1px solid #3498db;  
+        }  
+        
+        th, td {  
+            padding: 0.5rem;  
+            text-align: center;  
+        }  
+        
+        th {  
+            background-color: #3498db;  
+            color: white;  
+        }  
     </style>  
 </head>
 <body>
@@ -293,13 +314,73 @@
             <p>Vektor \((3, 4)\) dapat dinyatakan sebagai \(3i + 4j\).</p>
         </div>
         
-        <h2>6. Oktan dari Absis (x), Ordinat (y), Aplikat (z)</h2>
-        <p>Dalam sistem koordinat tiga dimensi, posisi titik ditentukan oleh tiga komponen: absis (\(x\)), ordinat (\(y\)), dan aplikat (\(z\)). Ruang tiga dimensi dibagi menjadi delapan bagian yang disebut oktan.</p>
-        <ul>
-            <li>Oktan pertama: \(x > 0, y > 0, z > 0\)</li>
-            <li>Oktan kedua: \(x < 0, y > 0, z > 0\)</li>
-            <li>Dan seterusnya untuk kombinasi lainnya.</li>
-        </ul>
+        <h2>6. Oktan dari Absis (x), Ordinat (y), Aplikat (z)</h2>  
+        <p>Dalam ruang tiga dimensi (R³), ruang dibagi menjadi 8 oktan berdasarkan tanda dari koordinat x, y, dan z.</p>  
+        
+        <div class="overflow-x-auto">  
+            <table>  
+                <thead>  
+                    <tr>  
+                        <th>Oktan</th>  
+                        <th>x</th>  
+                        <th>y</th>  
+                        <th>z</th>  
+                    </tr>  
+                </thead>  
+                <tbody>  
+                    <tr>  
+                        <td>I</td>  
+                        <td>+</td>  
+                        <td>+</td>  
+                        <td>+</td>  
+                    </tr>  
+                    <tr>  
+                        <td>II</td>  
+                        <td>-</td>  
+                        <td>+</td>  
+                        <td>+</td>  
+                    </tr>  
+                    <tr>  
+                        <td>III</td>  
+                        <td>-</td>  
+                        <td>-</td>  
+                        <td>+</td>  
+                    </tr>  
+                    <tr>  
+                        <td>IV</td>  
+                        <td>+</td>  
+                        <td>-</td>  
+                        <td>+</td>  
+                    </tr>  
+                    <tr>  
+                        <td>V</td>  
+                        <td>+</td>  
+                        <td>+</td>  
+                        <td>-</td>  
+                    </tr>  
+                    <tr>  
+                        <td>VI</td>  
+                        <td>-</td>  
+                        <td>+</td>  
+                        <td>-</td>  
+                    </tr>  
+                    <tr>  
+                        <td>VII</td>  
+                        <td>-</td>  
+                        <td>-</td>  
+                        <td>-</td>  
+                    </tr>  
+                    <tr>  
+                        <td>VIII</td>  
+                        <td>+</td>  
+                        <td>-</td>  
+                        <td>-</td>  
+                    </tr>  
+                </tbody>  
+            </table>  
+        </div>  
+        
+        <p>Setiap oktan merepresentasikan kombinasi unik dari tanda koordinat x, y, dan z dalam ruang tiga dimensi.</p>      
         
         <h2>7. Perkalian Dua Vektor (Perkalian Skalar)</h2>
         <div class="math-block">
