@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geometri Analitik: Lingkaran</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1a1a1a;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .progress-container {
+            width: 300px;
+            height: 20px;
+            background: #333;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        #progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #00ff88, #00ffee);
+            transition: width 0.5s ease;
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .show-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #00ff88;
+            text-align: center;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 10px rgba(0,255,136,0.5);
+        }
+
+        h2 {
+            color: #00ffee;
+            margin: 1.5rem 0;
+            border-bottom: 2px solid #00ffee;
+            padding-bottom: 0.5rem;
+        }
+
+        p {
+            line-height: 1.6;
+            margin: 1rem 0;
+        }
+
+        .math {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .floating-circle {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border: 2px solid rgba(0,255,136,0.2);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 10s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: rotate(0deg) translate(50px) rotate(0deg); }
+            100% { transform: rotate(360deg) translate(50px) rotate(-360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="loader">
+        <h1>Loading...</h1>
+        <div class="progress-container">
+            <div id="progress-bar"></div>
+        </div>
+    </div>
+
+    <div class="floating-circle"></div>
+    
+    <div class="content">
+        <h1>Geometri Analitik: Lingkaran</h1>
+        
+        <h2>Pengertian Lingkaran</h2>
+        <p>Lingkaran adalah tempat kedudukan titik-titik pada bidang datar yang berjarak sama terhadap suatu titik tertentu. Titik tertentu ini disebut sebagai pusat lingkaran, dan jarak dari pusat ke setiap titik pada lingkaran disebut jari-jari.</p>
+
+        <h2>Persamaan Lingkaran</h2>
+        <div class="math">
+            <p>1. Persamaan Umum Lingkaran</p>
+            <p>Jika pusat lingkaran berada di titik (a,b) dengan jari-jari r, maka persamaan umumnya adalah:</p>
+            <p>(x-a)² + (y-b)² = r²</p>
+        </div>
+
+        <div class="math">
+            <p>2. Persamaan Lingkaran dengan Pusat (0,0)</p>
+            <p>x² + y² = r²</p>
+        </div>
+
+        <div class="math">
+            <p>3. Persamaan Bentuk Umum</p>
+            <p>x² + y² + Dx + Ey + F = 0</p>
+            <p>Pusat: (-D/2, -E/2)</p>
+            <p>Jari-jari: r = √((D/2)² + (E/2)² - F)</p>
+        </div>
+
+        <h2>Kedudukan Titik dan Garis Terhadap Lingkaran</h2>
+        <div class="math">
+            <p>1. Kedudukan Titik P(x,y):</p>
+            <p>• (x-a)² + (y-b)² < r² : titik P di dalam lingkaran</p>
+            <p>• (x-a)² + (y-b)² = r² : titik P pada lingkaran</p>
+            <p>• (x-a)² + (y-b)² > r² : titik P di luar lingkaran</p>
+        </div>
+
+        <div class="math">
+            <p>2. Kedudukan Garis y = mx + c:</p>
+            <p>D = (2mc)² - 4(1+m²)(c²-r²)</p>
+            <p>• D < 0 : garis tidak memotong lingkaran</p>
+            <p>• D = 0 : garis menyinggung lingkaran</p>
+            <p>• D > 0 : garis memotong lingkaran di dua titik</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && (event.key === 'c' || event.key === 'C' || event.key === 'u' || event.key === 'U')) {
+                event.preventDefault();
+            }
+        });
+
+        let progress = 0;
+        const progressBar = document.getElementById('progress-bar');
+        const loader = document.getElementById('loader');
+        const content = document.querySelector('.content');
+
+        const loadingInterval = setInterval(() => {
+            progress += Math.random() * 30;
+            if (progress > 100) {
+                progress = 100;
+                clearInterval(loadingInterval);
+                setTimeout(() => {
+                    loader.style.opacity = '0';
+                    setTimeout(() => {
+                        loader.style.display = 'none';
+                        content.classList.add('show-content');
+                    }, 500);
+                }, 500);
+            }
+            progressBar.style.width = progress + '%';
+        }, 200);
+
+        // Create multiple floating circles
+        for (let i = 0; i < 3; i++) {
+            const circle = document.createElement('div');
+            circle.className = 'floating-circle';
+            circle.style.left = Math.random() * 100 + 'vw';
+            circle.style.top = Math.random() * 100 + 'vh';
+            circle.style.animationDelay = i * -3 + 's';
+            document.body.appendChild(circle);
+        }
+    </script>
+</body>
+</html>
