@@ -5,21 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geometri Analitik: Lingkaran</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            user-select: none;
-            -webkit-user-select: none;
-        }
+        * {  
+            margin: 0;  
+            padding: 0;  
+            box-sizing: border-box;  
+            user-select: none;  
+            -webkit-user-select: none;  
+            -moz-user-select: none;  
+            -ms-user-select: none;  
+        }  
 
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
-            color: #fff;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
+        body {  
+            font-family: 'Segoe UI', sans-serif;  
+            background: linear-gradient(45deg, #1a1a1a, #2a2a2a);  
+            color: #fff;  
+            min-height: 100vh;  
+            overflow-x: hidden;  
+            position: relative;  
+        }  
+
+        /* Overlay to prevent screenshots */  
+        #screenshot-overlay {  
+            position: fixed;  
+            top: 0;  
+            left: 0;  
+            width: 100%;  
+            height: 100%;  
+            background: repeating-linear-gradient(  
+                45deg,  
+                rgba(255,0,0,0.05),  
+                rgba(255,0,0,0.05) 10px,  
+                rgba(255,0,0,0.1) 10px,  
+                rgba(255,0,0,0.1) 20px  
+            );  
+            pointer-events: none;  
+            z-index: 9999;  
+            mix-blend-mode: overlay;  
+        }  
+
+        /* Rest of the previous styles remain the same */  
+        #loader {  
+            position: fixed;  
+            top: 0;  
+            left: 0;  
+            width: 100%;  
+            height: 100%;  
+            background: #1a1a1a;  
+            display: flex;  
+            flex-direction: column;  
+            justify-content: center;  
+            align-items: center;  
+            z-index: 1000;  
+        }  
 
         #loader {
             position: fixed;
@@ -119,97 +156,152 @@
         }
     </style>
 </head>
-<body>
-    <div id="loader">
-        <h1>Loading...</h1>
-        <div class="progress-container">
-            <div id="progress-bar"></div>
-        </div>
-    </div>
+<body>  
+    <!-- Screenshot prevention overlay -->  
+    <div id="screenshot-overlay"></div>  
 
-    <div class="floating-circle"></div>
+    <div id="loader">  
+        <h1>Loading...</h1>  
+        <div class="progress-container">  
+            <div id="progress-bar"></div>  
+        </div>  
+    </div>  
+
+    <div class="floating-circle"></div>  
     
-    <div class="content">
-        <h1>Geometri Analitik: Lingkaran</h1>
+    <div class="content">  
+        <h1>Geometri Analitik: Lingkaran</h1>  
         
-        <h2>Pengertian Lingkaran</h2>
-        <p>Lingkaran adalah tempat kedudukan titik-titik pada bidang datar yang berjarak sama terhadap suatu titik tertentu. Titik tertentu ini disebut sebagai pusat lingkaran, dan jarak dari pusat ke setiap titik pada lingkaran disebut jari-jari.</p>
+        <h2>Pengertian Lingkaran</h2>  
+        <p>Lingkaran adalah tempat kedudukan titik-titik pada bidang datar yang berjarak sama terhadap suatu titik tertentu. Titik tertentu ini disebut sebagai pusat lingkaran, dan jarak dari pusat ke setiap titik pada lingkaran disebut jari-jari.</p>  
 
-        <h2>Persamaan Lingkaran</h2>
-        <div class="math">
-            <p>1. Persamaan Umum Lingkaran</p>
-            <p>Jika pusat lingkaran berada di titik (a,b) dengan jari-jari r, maka persamaan umumnya adalah:</p>
-            <p>(x-a)² + (y-b)² = r²</p>
-        </div>
+        <h2>Persamaan Lingkaran</h2>  
+        <div class="math">  
+            <p>1. Persamaan Umum Lingkaran</p>  
+            <p>Jika pusat lingkaran berada di titik (a,b) dengan jari-jari r, maka persamaan umumnya adalah:</p>  
+            <p>(x-a)² + (y-b)² = r²</p>  
+        </div>  
 
-        <div class="math">
-            <p>2. Persamaan Lingkaran dengan Pusat (0,0)</p>
-            <p>x² + y² = r²</p>
-        </div>
+        <div class="math">  
+            <p>2. Persamaan Lingkaran dengan Pusat (0,0)</p>  
+            <p>x² + y² = r²</p>  
+        </div>  
 
-        <div class="math">
-            <p>3. Persamaan Bentuk Umum</p>
-            <p>x² + y² + Dx + Ey + F = 0</p>
-            <p>Pusat: (-D/2, -E/2)</p>
-            <p>Jari-jari: r = √((D/2)² + (E/2)² - F)</p>
-        </div>
+        <div class="math">  
+            <p>3. Persamaan Bentuk Umum</p>  
+            <p>x² + y² + Dx + Ey + F = 0</p>  
+            <p>Pusat: (-D/2, -E/2)</p>  
+            <p>Jari-jari: r = √((D/2)² + (E/2)² - F)</p>  
+        </div>  
 
-        <h2>Kedudukan Titik dan Garis Terhadap Lingkaran</h2>
-        <div class="math">
-            <p>1. Kedudukan Titik P(x,y):</p>
-            <p>• (x-a)² + (y-b)² < r² : titik P di dalam lingkaran</p>
-            <p>• (x-a)² + (y-b)² = r² : titik P pada lingkaran</p>
-            <p>• (x-a)² + (y-b)² > r² : titik P di luar lingkaran</p>
-        </div>
+        <h2>Kedudukan Titik dan Garis Terhadap Lingkaran</h2>  
+        <div class="math">  
+            <p>1. Kedudukan Titik P(x,y):</p>  
+            <p>• (x-a)² + (y-b)² < r² : titik P di dalam lingkaran</p>  
+            <p>• (x-a)² + (y-b)² = r² : titik P pada lingkaran</p>  
+            <p>• (x-a)² + (y-b)² > r² : titik P di luar lingkaran</p>  
+        </div>  
 
-        <div class="math">
-            <p>2. Kedudukan Garis y = mx + c:</p>
-            <p>D = (2mc)² - 4(1+m²)(c²-r²)</p>
-            <p>• D < 0 : garis tidak memotong lingkaran</p>
-            <p>• D = 0 : garis menyinggung lingkaran</p>
-            <p>• D > 0 : garis memotong lingkaran di dua titik</p>
-        </div>
-    </div>
+        <div class="math">  
+            <p>2. Kedudukan Garis y = mx + c:</p>  
+            <p>D = (2mc)² - 4(1+m²)(c²-r²)</p>  
+            <p>• D < 0 : garis tidak memotong lingkaran</p>  
+            <p>• D = 0 : garis menyinggung lingkaran</p>  
+            <p>• D > 0 : garis memotong lingkaran di dua titik</p>  
+        </div>  
+    </div>  
 
-    <script>
-        document.addEventListener('contextmenu', event => event.preventDefault());
-        
-        document.addEventListener('keydown', function(event) {
-            if (event.ctrlKey && (event.key === 'c' || event.key === 'C' || event.key === 'u' || event.key === 'U')) {
-                event.preventDefault();
-            }
-        });
+    <script>  
+        // Comprehensive protection against screenshots and copying  
+        (function() {  
+            // Disable right-click context menu  
+            document.addEventListener('contextmenu', event => event.preventDefault());  
+            
+            // Prevent copy, cut, and select operations  
+            document.addEventListener('keydown', function(event) {  
+                // Prevent Ctrl+C, Ctrl+X, Ctrl+V, Ctrl+A, Ctrl+S, Ctrl+P  
+                if (event.ctrlKey && ['c', 'x', 'v', 'a', 's', 'p'].includes(event.key.toLowerCase())) {  
+                    event.preventDefault();  
+                }  
+                
+                // Prevent Print Screen and F12  
+                if (event.key === 'F12' || event.keyCode === 44) {  
+                    event.preventDefault();  
+                }  
+            });  
 
-        let progress = 0;
-        const progressBar = document.getElementById('progress-bar');
-        const loader = document.getElementById('loader');
-        const content = document.querySelector('.content');
+            // Prevent text selection  
+            document.body.style.userSelect = 'none';  
+            document.body.style.webkitUserSelect = 'none';  
+            document.body.style.mozUserSelect = 'none';  
+            document.body.style.msUserSelect = 'none';  
 
-        const loadingInterval = setInterval(() => {
-            progress += Math.random() * 30;
-            if (progress > 100) {
-                progress = 100;
-                clearInterval(loadingInterval);
-                setTimeout(() => {
-                    loader.style.opacity = '0';
-                    setTimeout(() => {
-                        loader.style.display = 'none';
-                        content.classList.add('show-content');
-                    }, 500);
-                }, 500);
-            }
-            progressBar.style.width = progress + '%';
-        }, 200);
+            // Prevent developer tools  
+            document.addEventListener('keydown', function(e) {  
+                if (e.keyCode === 123) {  
+                    e.preventDefault();  
+                }  
+                if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) {  
+                    e.preventDefault();  
+                }  
+            });  
 
-        // Create multiple floating circles
-        for (let i = 0; i < 3; i++) {
-            const circle = document.createElement('div');
-            circle.className = 'floating-circle';
-            circle.style.left = Math.random() * 100 + 'vw';
-            circle.style.top = Math.random() * 100 + 'vh';
-            circle.style.animationDelay = i * -3 + 's';
-            document.body.appendChild(circle);
-        }
-    </script>
-</body>
-</html>
+            // Detect and prevent screenshots (mobile and desktop)  
+            function preventScreenshot() {  
+                const overlay = document.getElementById('screenshot-overlay');  
+                if (overlay) {  
+                    overlay.style.display = 'block';  
+                    setTimeout(() => {  
+                        overlay.style.display = 'none';  
+                    }, 100);  
+                }  
+            }  
+
+            // Add multiple screenshot prevention methods  
+            window.addEventListener('blur', preventScreenshot);  
+            
+            // Prevent long press on mobile  
+            document.addEventListener('touchstart', function(e) {  
+                e.preventDefault();  
+            }, { passive: false });  
+
+            // Prevent drag and drop  
+            document.addEventListener('dragstart', function(e) {  
+                e.preventDefault();  
+            });  
+
+            // Loader and content reveal logic (previous implementation)  
+            let progress = 0;  
+            const progressBar = document.getElementById('progress-bar');  
+            const loader = document.getElementById('loader');  
+            const content = document.querySelector('.content');  
+
+            const loadingInterval = setInterval(() => {  
+                progress += Math.random() * 30;  
+                if (progress > 100) {  
+                    progress = 100;  
+                    clearInterval(loadingInterval);  
+                    setTimeout(() => {  
+                        loader.style.opacity = '0';  
+                        setTimeout(() => {  
+                            loader.style.display = 'none';  
+                            content.classList.add('show-content');  
+                        }, 500);  
+                    }, 500);  
+                }  
+                progressBar.style.width = progress + '%';  
+            }, 200);  
+
+            // Create multiple floating circles  
+            for (let i = 0; i < 3; i++) {  
+                const circle = document.createElement('div');  
+                circle.className = 'floating-circle';  
+                circle.style.left = Math.random() * 100 + 'vw';  
+                circle.style.top = Math.random() * 100 + 'vh';  
+                circle.style.animationDelay = i * -3 + 's';  
+                document.body.appendChild(circle);  
+            }  
+        })();  
+    </script>  
+</body>  
+</html>  
