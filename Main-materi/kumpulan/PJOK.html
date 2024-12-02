@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panduan Lengkap Olahraga</title>
+    <style>
+        /* Reset dan style dasar */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Loader styles */
+        .loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.5s;
+        }
+
+        .loader {
+            width: 150px;
+            height: 150px;
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .progress-container {
+            width: 300px;
+            margin-top: 20px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #f3f3f3;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress {
+            width: 0%;
+            height: 100%;
+            background: #3498db;
+            transition: width 0.5s ease-in-out;
+        }
+
+        .loading-text {
+            margin-top: 10px;
+            font-size: 18px;
+            color: #3498db;
+        }
+
+        /* Content styles */
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease-out;
+        }
+
+        .content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+        }
+
+        .sport-section {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            transform: scale(0.98);
+            transition: transform 0.3s ease;
+        }
+
+        .sport-section:hover {
+            transform: scale(1);
+        }
+
+        h2 {
+            color: #3498db;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        h3 {
+            color: #2c3e50;
+            margin: 15px 0;
+            font-size: 1.5em;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+
+        li {
+            margin: 10px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        li:before {
+            content: "•";
+            color: #3498db;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .content {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .sport-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader-container">
+        <div class="loader"></div>
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+        </div>
+        <div class="loading-text">Memuat panduan olahraga...</div>
+    </div>
+
+    <div class="content">
+        <h1>PANDUAN LENGKAP OLAHRAGA</h1>
+
+        <!-- Sepak Bola Section -->
+        <div class="sport-section" id="sepak-bola">
+            <h2>SEPAK BOLA</h2>
+            
+            <h3>Formasi dan Posisi Pemain</h3>
+            <p>Formasi sepak bola terdiri dari 11 pemain dengan berbagai posisi strategis:</p>
+            
+            <h3>Posisi Pemain:</h3>
+            <ul>
+                <li>Penjaga gawang (GK) - Benteng terakhir pertahanan</li>
+                <li>Bek (CB, LB, RB) - Pemain bertahan</li>
+                <li>Gelandang (DM, CM, AM) - Pengatur permainan di tengah lapangan</li>
+                <li>Penyerang (CF, SS, LW, RW) - Ujung tombak pencetak gol</li>
+            </ul>
+
+            <h3>Formasi Populer:</h3>
+            <ul>
+                <li>4-4-2: Seimbang untuk bertahan dan menyerang</li>
+                <li>4-3-3: Formasi ofensif modern dengan 3 penyerang</li>
+                <li>4-5-1: Fokus penguasaan bola di tengah</li>
+                <li>3-5-2: Dominasi lini tengah dengan 2 penyerang</li>
+            </ul>
+
+            <h3>Teknik Mencetak Gol</h3>
+            <h4>Open Play</h4>
+            <ul>
+                <li>Build up dari belakang</li>
+                <li>Serangan balik cepat</li>
+                <li>Penguasaan bola</li>
+                <li>Umpan silang</li>
+                <li>Tap in</li>
+            </ul>
+
+            <h4>Set Piece</h4>
+            <ul>
+                <li>Tendangan bebas langsung/tidak langsung</li>
+                <li>Tendangan pojok</li>
+                <li>Tendangan penalti</li>
+            </ul>
+
+            <h3>Strategi Bertahan</h3>
+            <ul>
+                <li>Menghalau pemain lawan ("parkir bus")</li>
+                <li>Memotong umpan (intercept)</li>
+                <li>Blocking tembakan</li>
+                <li>Performa penjaga gawang</li>
+            </ul>
+        </div>
+
+        <!-- Bola Basket Section -->
+        <div class="sport-section" id="bola-basket">
+            <h2>BOLA BASKET</h2>
+            
+            <h3>Posisi dan Formasi</h3>
+            <p>5 Posisi Utama:</p>
+            <ul>
+                <li>Point Guard (1): Pengatur serangan</li>
+                <li>Shooting Guard (2): Penembak jarak jauh</li>
+                <li>Small Forward (3): Penyerang serbaguna</li>
+                <li>Power Forward (4): Dominan di area dalam</li>
+                <li>Center (5): Pemain tinggi untuk rebound</li>
+            </ul>
+
+            <h3>Teknik Membuka Ruang</h3>
+            <ul>
+                <li>V-Cut: Gerakan berbentuk V untuk lepas penjagaan</li>
+                <li>Front Cut: Gerakan memotong dari depan</li>
+                <li>Backdoor Cut: Gerakan memotong dari belakang</li>
+                <li>Give and Go: Operan dan lari berlawanan arah</li>
+                <li>Screen: Menghalangi pergerakan lawan</li>
+            </ul>
+
+            <h3>Strategi Permainan</h3>
+            <h4>Penyerangan:</h4>
+            <ul>
+                <li>Off The Ball: Pergerakan tanpa bola</li>
+                <li>Fastbreak: Serangan kilat</li>
+                <li>Set Offense: Serangan terstruktur</li>
+            </ul>
+
+            <h4>Pertahanan:</h4>
+            <ul>
+                <li>Individual: Penjagaan satu lawan satu</li>
+                <li>Zone Defense: Penjagaan zona</li>
+            </ul>
+        </div>
+
+        <!-- Bola Voli Section -->
+        <div class="sport-section" id="bola-voli">
+            <h2>BOLA VOLI</h2>
+            
+            <h3>Dasar Permainan</h3>
+            <ul>
+                <li>6 pemain per tim</li>
+                <li>Lapangan 9x18 meter</li>
+                <li>Menang dengan 25 poin (selisih 2)</li>
+            </ul>
+
+            <h3>Teknik Serangan</h3>
+            <ul>
+                <li>Open Smash: Smash normal dengan umpan tinggi</li>
+                <li>Semi Smash: Umpan setinggi 1-2 meter</li>
+                <li>Quick Smash: Serangan cepat dan mendadak</li>
+                <li>Back Attack: Smash dari belakang</li>
+                <li>Dump Shot: Pukulan tipuan</li>
+            </ul>
+
+            <h3>Sistem Pertahanan</h3>
+            <h4>Pola Penerimaan Servis:</h4>
+            <ul>
+                <li>1-5: 1 depan, 5 belakang</li>
+                <li>2-4: 2 depan, 4 belakang</li>
+                <li>3-3: 3 depan, 3 belakang</li>
+            </ul>
+
+            <h4>Teknik Bertahan:</h4>
+            <ul>
+                <li>Block: Bendungan 1-3 pemain</li>
+                <li>Covering: Antisipasi bola tipuan</li>
+                <li>Passing Bawah: Pertahanan terakhir</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loader = document.querySelector('.loader-container');
+            const content = document.querySelector('.content');
+            const progress = document.querySelector('.progress');
+            const loadingText = document.querySelector('.loading-text');
+            
+            let width = 0;
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        loader.style.opacity = '0';
+                        setTimeout(() => {
+                            loader.style.display = 'none';
+                            content.classList.add('visible');
+                        }, 500);
+                    }, 500);
+                } else {
+                    width++;
+                    progress.style.width = width + '%';
+                    loadingText.textContent = `Memuat panduan olahraga... ${width}%`;
+                }
+            }, 30);
+        });
+    </script>
+
+<script language="javascript">
+    var noPrint = true;
+    var noCopy = true;
+    var noScreenshot = true;
+    var autoBlur = true;
+    </script>
+    <script type="text/javascript" src="https://pdfanticopy.com/noprint.js"></script>
+    <script>
+    document.addEventListener('contextmenu', (e) => e.preventDefault());
+    
+    document.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && 
+            (e.key === 'c' || 
+             e.key === 'C' || 
+             e.key === 'u' ||
+             e.key === 'U' ||
+             e.key === 'v' ||
+             e.key === 'V' ||
+             e.key === 'p' ||
+             e.key === 'P' ||
+             e.key === 's' ||
+             e.key === 'S')) {
+            e.preventDefault();
+        }
+    });
+    
+    // Mencegah drag and drop
+    document.addEventListener('dragstart', (e) => {
+        e.preventDefault();
+    });
+    
+    // Mencegah seleksi teks
+    document.addEventListener('selectstart', (e) => {
+        e.preventDefault();
+    });
+    </script>
+</body>
+</html>
