@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi Vektor dalam Matematika</title>
+    <style>  
+        /* Reset and base styles */  
+        * {  
+            margin: 0;  
+            padding: 0;  
+            box-sizing: border-box;  
+        }  
+
+        html, body {  
+            height: 100%;  
+            overflow-x: hidden;  
+        }  
+
+        body {  
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
+            line-height: 1.6;  
+            color: #333;  
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);  
+            background-attachment: fixed;  
+        }  
+
+        /* Improved container styles */  
+        .container {  
+            max-width: 800px;  
+            width: 95%;  
+            margin: 0 auto;  
+            padding: 2rem 1rem;  
+            background-color: rgba(255,255,255,0.9);  
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);  
+            min-height: 100vh;  
+        }  
+
+        /* Headings */  
+        h1 {  
+            text-align: center;  
+            color: #2c3e50;  
+            margin-bottom: 2rem;  
+            font-size: 2.5rem;  
+            border-bottom: 2px solid #3498db;  
+            padding-bottom: 0.5rem;  
+        }  
+
+        h2 {  
+            color: #2980b9;  
+            margin: 2rem 0 1rem;  
+            padding-left: 10px;  
+            border-left: 4px solid #3498db;  
+        }  
+
+        h3, h4 {  
+            color: #34495e;  
+            margin: 1rem 0;  
+        }  
+
+        /* Math and example blocks */  
+        .math-block, .example {  
+            background-color: #f9f9f9;  
+            border: 1px solid #e0e0e0;  
+            border-radius: 8px;  
+            padding: 1rem;  
+            margin: 1rem 0;  
+            overflow-x: auto;  
+        }  
+
+        .math-block {  
+            background-color: #f0f4f8;  
+        }  
+
+        .example {  
+            background-color: #e6f2ff;  
+            border-left: 4px solid #3498db;  
+        }  
+
+        /* List styles */  
+        ul, ol {  
+            padding-left: 2rem;  
+            margin: 1rem 0;  
+        }  
+
+        /* Responsive adjustments */  
+        @media (max-width: 768px) {  
+            .container {  
+                width: 100%;  
+                padding: 1rem;  
+            }  
+
+            h1 {  
+                font-size: 2rem;  
+            }  
+        }  
+
+        /* MathJax overflow handling */  
+        .MathJax_Display {  
+            overflow-x: auto;  
+            overflow-y: hidden;  
+            max-width: 100%;  
+        }  
+
+        /* Scroll bar styling */  
+        ::-webkit-scrollbar {  
+            width: 8px;  
+        }  
+
+        ::-webkit-scrollbar-track {  
+            background: #f1f1f1;  
+        }  
+
+        ::-webkit-scrollbar-thumb {  
+            background: #3498db;  
+            border-radius: 4px;  
+        }  
+
+        ::-webkit-scrollbar-thumb:hover {  
+            background: #2980b9;  
+        }  
+
+        /* Prevent content overflow */  
+        pre, code, .math-block, .example {  
+            max-width: 100%;  
+            overflow-x: auto;  
+            word-wrap: break-word;  
+        }  
+
+        /* Loader and particles styles (kept from previous version) */  
+        .loader-wrapper {  
+            position: fixed;  
+            width: 100%;  
+            height: 100%;  
+            background: #121212;  
+            display: flex;  
+            justify-content: center;  
+            align-items: center;  
+            z-index: 9999;  
+        }  
+
+        .loader {  
+            width: 200px;  
+            height: 4px;  
+            background: #333;  
+            border-radius: 4px;  
+            overflow: hidden;  
+        }  
+
+        .loader-bar {  
+            width: 0;  
+            height: 100%;  
+            background: linear-gradient(45deg, #00ff87, #60efff);  
+            animation: loading 2s ease-in-out;  
+        }  
+
+        @keyframes loading {  
+            0% { width: 0; }  
+            100% { width: 100%; }  
+        }  
+
+        #particles-js {  
+            position: fixed;  
+            width: 100%;  
+            height: 100%;  
+            top: 0;  
+            left: 0;  
+            z-index: -1;  
+        }  
+
+        body {  
+            -webkit-user-select: none;  
+            -moz-user-select: none;  
+            -ms-user-select: none;  
+            user-select: none;  
+        }  
+
+        /* Overlay for additional protection */  
+        #protection-overlay {  
+            position: fixed;  
+            top: 0;  
+            left: 0;  
+            width: 100%;  
+            height: 100%;  
+            background: rgba(0,0,0,0.05);  
+            pointer-events: none;  
+            z-index: 9998;  
+            display: none;  
+        }  
+    </style>  
+</head>
+<body>
+    <div class="loader-wrapper">
+        <div class="loader">
+            <div class="loader-bar"></div>
+        </div>
+    </div>
+
+    <div id="particles-js"></div>
+
+    <div class="container">
+        <h1>Materi Vektor dalam Matematika</h1>
+        
+        <p>Vektor adalah konsep penting dalam matematika yang digunakan untuk merepresentasikan besaran yang memiliki arah dan nilai. Mari kita bahas satu per satu topik yang berkaitan dengan vektor.</p>
+        
+        <h2>1. Penjumlahan/Pengurangan Vektor</h2>
+        <p>Vektor dapat dijumlahkan atau dikurangkan dengan cara menjumlahkan atau mengurangkan komponen-komponennya.</p>
+        
+        <div class="math-block">
+            <h3>Penjumlahan Vektor</h3>
+            <p>Misalkan ada dua vektor \(\mathbf{a} = (a_1, a_2)\) dan \(\mathbf{b} = (b_1, b_2)\). Penjumlahan vektor dilakukan dengan cara:</p>
+            <p>\[
+            \mathbf{a} + \mathbf{b} = (a_1 + b_1, a_2 + b_2)
+            \]</p>
+        </div>
+        
+        <div class="math-block">
+            <h3>Pengurangan Vektor</h3>
+            <p>Pengurangan dilakukan dengan cara yang sama:</p>
+            <p>\[
+            \mathbf{a} - \mathbf{b} = (a_1 - b_1, a_2 - b_2)
+            \]</p>
+        </div>
+        
+        <div class="example">
+            <h4>Contoh Soal</h4>
+            <p>Jika \(\mathbf{a} = (3, 4)\) dan \(\mathbf{b} = (1, 2)\), maka:</p>
+            <ul>
+                <li>\(\mathbf{a} + \mathbf{b} = (3+1, 4+2) = (4, 6)\)</li>
+                <li>\(\mathbf{a} - \mathbf{b} = (3-1, 4-2) = (2, 2)\)</li>
+            </ul>
+        </div>
+        
+        <h2>2. Menentukan Panjang/Besar Vektor</h2>
+        <div class="math-block">
+            <p>Panjang atau besar dari sebuah vektor \(\mathbf{v} = (x, y)\) dapat dihitung menggunakan rumus:</p>
+            <p>\[
+            |\mathbf{v}| = \sqrt{x^2 + y^2}
+            \]</p>
+        </div>
+        
+        <div class="example">
+            <h4>Contoh Soal</h4>
+            <p>Untuk vektor \(\mathbf{v} = (3, 4)\), panjangnya adalah:</p>
+            <p>\[
+            |\mathbf{v}| = \sqrt{3^2 + 4^2} = \sqrt{9 + 16} = \sqrt{25} = 5
+            \]</p>
+        </div>
+        
+        <h2>3. Arah Vektor</h2>
+        <div class="math-block">
+            <p>Arah vektor dinyatakan dalam bentuk sudut terhadap sumbu x. Jika vektor \(\mathbf{v} = (x, y)\), arah \(\theta\) dapat dihitung dengan:</p>
+            <p>\[
+            \theta = \tan^{-1}\left(\frac{y}{x}\right)
+            \]</p>
+        </div>
+        
+        <div class="example">
+            <h4>Contoh Soal</h4>
+            <p>Untuk vektor \(\mathbf{v} = (3, 4)\), arah vektornya adalah:</p>
+            <p>\[
+            \theta = \tan^{-1}\left(\frac{4}{3}\right)
+            \]</p>
+            <p>Ini biasanya memerlukan kalkulator untuk mendapatkan nilai sudut dalam derajat atau radian.</p>
+        </div>
+        
+        <h2>4. Vektor Satuan</h2>
+        <div class="math-block">
+            <p>Vektor satuan adalah vektor yang memiliki panjang 1. Untuk mendapatkan vektor satuan dari suatu vektor \(\mathbf{v}\), kita bagi setiap komponen dengan panjang vektornya:</p>
+            <p>\[
+            \hat{\mathbf{v}} = \left(\frac{x}{|\mathbf{v}|}, \frac{y}{|\mathbf{v}|}\right)
+            \]</p>
+        </div>
+        
+        <div class="example">
+            <h4>Contoh Soal</h4>
+            <p>Untuk vektor \(\mathbf{v} = (3, 4)\), panjangnya adalah 5 seperti yang telah dihitung. Maka vektor satuannya adalah:</p>
+            <p>\[
+            \hat{\mathbf{v}} = \left(\frac{3}{5}, \frac{4}{5}\right)
+            \]</p>
+        </div>
+        
+        <h2>5. Vektor Basis</h2>
+        <p>Vektor basis adalah himpunan vektor yang digunakan untuk menggambarkan ruang vektor. Dalam dua dimensi, biasanya digunakan vektor basis standar:</p>
+        <ul>
+            <li>\(i = (1, 0)\)</li>
+            <li>\(j = (0, 1)\)</li>
+        </ul>
+        <p>Setiap vektor dalam ruang dua dimensi dapat dinyatakan sebagai kombinasi linear dari \(i\) dan \(j\).</p>
+        
+        <div class="example">
+            <h4>Contoh Soal</h4>
+            <p>Vektor \((3, 4)\) dapat dinyatakan sebagai \(3i + 4j\).</p>
+        </div>
+        
+        <h2>6. Oktan dari Absis (x), Ordinat (y), Aplikat (z)</h2>
+        <p>Dalam sistem koordinat tiga dimensi, posisi titik ditentukan oleh tiga komponen: absis (\(x\)), ordinat (\(y\)), dan aplikat (\(z\)). Ruang tiga dimensi dibagi menjadi delapan bagian yang disebut oktan.</p>
+        <ul>
+            <li>Oktan pertama: \(x > 0, y > 0, z > 0\)</li>
+            <li>Oktan kedua: \(x < 0, y > 0, z > 0\)</li>
+            <li>Dan seterusnya untuk kombinasi lainnya.</li>
+        </ul>
+        
+        <h2>7. Perkalian Dua Vektor (Perkalian Skalar)</h2>
+        <div class="math-block">
+            <p>Perkalian skalar antara dua vektor menghasilkan sebuah bilangan skalar. Jika ada dua vektor \(\mathbf{a} = (a_1, a_2)\) dan \(\mathbf{b} = (b_1, b_2)\), maka perkalian skalarnya adalah:</p>
+            <p>\[
+            \mathbf{a} \cdot \mathbf{b} = a_1b_1 + a_2b_2
+            \]</p>
+        </div>
+        
+        <div class="example">
+            <h4>Contoh Soal</h4>
+            <p>Jika \(\mathbf{a} = (3, 4)\) dan \(\mathbf{b} = (1, 2)\), maka perkalian skalarnya adalah:</p>
+            <p>\[
+            \mathbf{a} \cdot \mathbf{b} = 3\times1 + 4\times2 = 3 + 8 = 11
+            \]</p>
+        </div>
+        
+        <p>Dengan memahami konsep-konsep dasar ini dan berlatih mengerjakan soal-soal di atas, Anda akan lebih mahir dalam memahami dan menggunakan konsep vektor dalam berbagai aplikasi matematika dan fisika.</p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>  
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>  
+    <script>  
+        // Advanced protection mechanisms  
+        (function() {  
+            // Prevent right-click  
+            document.addEventListener('contextmenu', e => e.preventDefault());  
+
+            // Comprehensive keyboard shortcut blocking  
+            document.addEventListener('keydown', e => {  
+                // Prevent common copy/screenshot/dev tools shortcuts  
+                const blockedKeys = [  
+                    // Copy shortcuts  
+                    'c', 'C',   
+                    // Select all  
+                    'a', 'A',   
+                    // Print  
+                    'p', 'P',   
+                    // Developer tools  
+                    'i', 'I',   
+                    // View source  
+                    'u', 'U',   
+                    // Save  
+                    's', 'S'  
+                ];  
+
+                if ((e.ctrlKey || e.metaKey) && blockedKeys.includes(e.key)) {  
+                    e.preventDefault();  
+                    return false;  
+                }  
+
+                // Block F12 and other dev tools keys  
+                if (e.key === 'F12' ||   
+                    (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key))) {  
+                    e.preventDefault();  
+                    return false;  
+                }  
+            });  
+
+            // Prevent text selection  
+            document.body.addEventListener('selectstart', e => e.preventDefault());  
+
+            // Screenshot prevention techniques  
+            let screenshotProtection = {  
+                overlay: null,  
+                init: function() {  
+                    this.overlay = document.getElementById('protection-overlay');  
+                    this.bindEvents();  
+                },  
+                bindEvents: function() {  
+                    // Detect potential screenshot attempts  
+                    document.addEventListener('copy', this.handleCopy.bind(this));  
+                    
+                    // Periodic screen check  
+                    setInterval(this.checkScreen.bind(this), 1000);  
+                },  
+                handleCopy: function(e) {  
+                    e.preventDefault();  
+                    alert('Penyalinan konten tidak diizinkan.');  
+                },  
+                checkScreen: function() {  
+                    // Simulate screen protection by briefly showing an overlay  
+                    if (this.overlay) {  
+                        this.overlay.style.display = 'block';  
+                        setTimeout(() => {  
+                            this.overlay.style.display = 'none';  
+                        }, 100);  
+                    }  
+                }  
+            };  
+
+            // Initialize screenshot protection  
+            screenshotProtection.init();  
+
+            // Disable image dragging  
+            const images = document.getElementsByTagName('img');  
+            for (let img of images) {  
+                img.addEventListener('dragstart', e => e.preventDefault());  
+            }  
+
+            // Loading animation  
+            window.addEventListener('load', () => {  
+                setTimeout(() => {  
+                    document.querySelector('.loader-wrapper').style.display = 'none';  
+                }, 2000);  
+            });  
+
+            // Initialize particles  
+            particlesJS('particles-js', {  
+                particles: {  
+                    number: { value: 80 },  
+                    color: { value: '#3498db' },  
+                    shape: { type: 'circle' },  
+                    opacity: { value: 0.5 },  
+                    size: { value: 3 },  
+                    move: {  
+                        enable: true,  
+                        speed: 2  
+                    }  
+                }  
+            });  
+        })();  
+    </script>  
+</body>  
+</html>  
