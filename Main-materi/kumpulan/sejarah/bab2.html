@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sejarah Perjuangan Indonesia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #f0f2f5;
+            color: #1a1a1a;
+        }
+
+        .loader-wrapper {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .progress-container {
+            width: 300px;
+            background: #ddd;
+            height: 5px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff0000, #ff6b6b);
+            border-radius: 10px;
+            transition: width 0.3s ease-in-out;
+        }
+
+        .loading-text {
+            color: #333;
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease-out;
+        }
+
+        .content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline-item {
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            transform: translateX(-100%);
+            opacity: 0;
+            transition: all 0.5s ease-out;
+        }
+
+        .timeline-item.visible {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+        }
+
+        h2 {
+            color: #ff4444;
+            margin-bottom: 15px;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 10px;
+            }
+            
+            .timeline-item {
+                margin: 10px;
+            }
+        }
+
+        .red-white-stripe {
+            height: 10px;
+            background: linear-gradient(45deg, #ff0000 50%, #ffffff 50%);
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="loader-wrapper">
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
+        <div class="loading-text">Memuat Sejarah Indonesia...</div>
+    </div>
+
+    <div class="content">
+        <h1>Sejarah Perjuangan Indonesia</h1>
+        <div class="red-white-stripe"></div>
+        
+        <div class="timeline">
+            <div class="timeline-item">
+                <h2>Pengakuan De Facto oleh Sekutu (1 Oktober 1945)</h2>
+                <p>Pada tanggal 1 Oktober 1945, Jenderal Christison dari Sekutu mengakui kedaulatan Republik Indonesia secara de facto. Hal ini terjadi karena adanya perundingan antara pihak Republik Indonesia dan Inggris, yang memperlancar masuknya Sekutu ke wilayah Indonesia.</p>
+            </div>
+
+            <div class="timeline-item">
+                <h2>Pertempuran Surabaya (10 November 1945)</h2>
+                <p>Pertempuran Surabaya pada 10 November 1945 adalah salah satu perlawanan heroik "Arek-arek Suroboyo" melawan pasukan Inggris. Gubernur Jawa Timur saat itu, Raden Soerjo, turut memimpin perjuangan ini bersama tokoh-tokoh lainnya seperti Bung Tomo yang mengobarkan semangat juang melalui siaran radio.</p>
+            </div>
+
+            <div class="timeline-item">
+                <h2>Hari Infanteri (15 Desember 1945)</h2>
+                <p>Hari Infanteri diperingati untuk mengenang kemenangan Tentara Keamanan Rakyat (TKR) dalam Pertempuran Ambarawa melawan pasukan Sekutu pada 15 Desember 1945. Pertempuran ini dipimpin oleh Kolonel Soedirman, yang kemudian menjadi Panglima Besar TNI.</p>
+            </div>
+
+            <div class="timeline-item">
+                <h2>Komisi Tiga Negara (KTN)</h2>
+                <p>"Good Will Commission" yang dibentuk PBB berubah nama menjadi Komisi Tiga Negara (KTN) pada tahun 1947, dengan anggota dari Australia, Amerika Serikat, dan Belgia. Australia adalah salah satu anggota KTN yang dipilih oleh Indonesia.</p>
+            </div>
+
+            <div class="timeline-item">
+                <h2>Hijrah Pasukan Divisi Siliwangi</h2>
+                <p>Pasukan Divisi Siliwangi hijrah ke wilayah Republik Indonesia di Jawa Tengah sebagai bagian dari implementasi Perjanjian Renville, yang mengharuskan penarikan pasukan dari wilayah-wilayah tertentu di Jawa Barat dan Jawa Timur.</p>
+            </div>
+
+            <div class="timeline-item">
+                <h2>Pemberontakan PKI Madiun (18 September 1948)</h2>
+                <p>Pemberontakan PKI di Madiun dipimpin oleh Muso dan Amir Sjarifuddin dengan tujuan menggulingkan pemerintahan Republik Indonesia dan mendirikan negara komunis. Pemberontakan ini terjadi karena ketidakpuasan terhadap hasil Perjanjian Renville dan kebijakan pemerintah saat itu.</p>
+            </div>
+
+            <div class="timeline-item">
+                <h2>Pengasingan Sukarno dan Hatta</h2>
+                <p>Presiden Sukarno, Moh. Hatta, dan pemimpin-pemimpin lainnya diasingkan ke Prapat dan ditangkap di Muntok setelah Agresi Militer Belanda II pada 19 Desember 1948.</p>
+            </div>
+
+            <div class="timeline-item">
+                <h2>Ancaman Penghentian Bantuan Ekonomi oleh Amerika</h2>
+                <p>Sebagai reaksi terhadap Agresi Militer Belanda II, Amerika Serikat mengancam akan menghentikan bantuan ekonominya kepada Belanda sebagai bentuk tekanan internasional terhadap tindakan Belanda di Indonesia.</p>
+            </div>
+
+            <div class="timeline-item">
+                <h2>Pemerintahan Darurat Republik Indonesia (PDRI)</h2>
+                <p>Syafruddin Prawiranegara ditunjuk oleh Presiden Sukarno untuk mendirikan Pemerintahan Darurat Republik Indonesia di Sumatra ketika pemerintah pusat jatuh ke tangan Belanda selama Agresi Militer Belanda II.</p>
+            </div>
+
+            <div class="timeline-item">
+                <h2>Konferensi Meja Bundar</h2>
+                <p>Kepastian untuk mengadakan Konferensi Meja Bundar muncul setelah tekanan internasional dan perundingan sebelumnya seperti Perjanjian Renville dan Roem-Royen, yang bertujuan menyelesaikan sengketa antara Indonesia dan Belanda secara damai.</p>
+            </div>
+
+            <div class="timeline-item">
+                <h2>Pertempuran Lima Hari di Semarang</h2>
+                <p>Pertempuran ini terjadi karena ketegangan antara pemuda Indonesia dengan tentara Jepang yang masih bersenjata setelah proklamasi kemerdekaan, serta upaya mempertahankan kedaulatan dari ancaman pihak asing.</p>
+            </div>
+
+            <div class="timeline-item">
+                <h2>Agresi Militer Belanda I (21 Juli 1947)</h2>
+                <p>Agresi ini dilakukan oleh Belanda untuk merebut kembali daerah-daerah kaya sumber daya alam di Indonesia setelah kegagalan implementasi Perjanjian Linggarjati.</p>
+            </div>
+
+            <div class="timeline-item">
+                <h2>Akibat Perundingan Renville</h2>
+                <p>Perjanjian Renville menyebabkan wilayah Republik Indonesia menjadi lebih sempit karena pengakuan terbatas hanya pada Jawa Tengah, Yogyakarta, dan Sumatra serta memicu ketidakpuasan yang berujung pada pemberontakan-pemberontakan seperti PKI Madiun.</p>
+            </div>
+
+            <div class="timeline-item">
+                <h2>Konsep Pertahanan Menghadapi Agresi Militer Belanda II</h2>
+                <p>Dalam menghadapi Agresi Militer Belanda II, strategi pertahanan Indonesia melibatkan perang gerilya serta diplomasi internasional untuk mendapatkan dukungan dunia.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loader = document.querySelector('.loader-wrapper');
+            const progressBar = document.querySelector('.progress-bar');
+            const content = document.querySelector('.content');
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            let progress = 0;
+
+            const loadingInterval = setInterval(() => {
+                progress += 1;
+                progressBar.style.width = `${progress}%`;
+                
+                if (progress >= 100) {
+                    clearInterval(loadingInterval);
+                    setTimeout(() => {
+                        loader.style.opacity = '0';
+                        setTimeout(() => {
+                            loader.style.display = 'none';
+                            content.classList.add('visible');
+                            animateTimelineItems();
+                        }, 500);
+                    }, 500);
+                }
+            }, 30);
+
+            function animateTimelineItems() {
+                timelineItems.forEach((item, index) => {
+                    setTimeout(() => {
+                        item.classList.add('visible');
+                    }, index * 200);
+                });
+            }
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            timelineItems.forEach(item => observer.observe(item));
+        });
+    </script>
+</body>
+</html>
