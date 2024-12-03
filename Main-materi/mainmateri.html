@@ -219,7 +219,7 @@
   <div class="button-container">
     <div class="links-container">
       <a href="https://stoy109.github.io/sebuah-ringkasan/Main-materi/kumpulan/sejarah/pilih.html" class="btn btn1">SEJARAH</a>
-      <a href="https://stoy109.github.io/sebuah-ringkasan/Main-materi/kumpulan/PJOK.html" class="btn btn2">🦖👯‍♂️🤼‍♀️♿🥋</a>
+      <a href="#" class="btn btn2" onclick="surpriseLink()">Yah begitu lah</a>  
     </div>
     <div class="tip-container" id="tipDisplay"></div>
   </div>
@@ -308,6 +308,25 @@
         tipTimer = 0;
       }
     });
+
+    function surpriseLink() {  
+    // Array of surprise links  
+    const surprises = [  
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ", // Rick Roll  
+      "https://www.youtube.com/watch?v=MeLO_vuwenQ", // Stick Bug Meme  
+      "https://www.youtube.com/watch?v=UIp6_0kct_U", // Indihome  
+      "https://youtu.be/Cnnw6ydQKfA?t=23", // Another funny redirect  
+    ];  
+
+    // Randomly select a surprise link  
+    const randomSurprise = surprises[Math.floor(Math.random() * surprises.length)];  
+    
+    // Open the surprise in a new tab  
+    window.open(randomSurprise, '_blank');  
+    
+    // Prevent default link behavior  
+    return false;  
+    }  
   </script>
 </body>
 </html>
