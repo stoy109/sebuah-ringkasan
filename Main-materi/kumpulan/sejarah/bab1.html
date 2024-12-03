@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sejarah Indonesia - Penataan Pemerintahan Awal Kemerdekaan</title>
+    <style>
+        /* Reset dan variabel */
+        :root {
+            --primary: #b22222;
+            --secondary: #daa520;
+            --text: #333;
+            --bg: #fff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Loader */
+        .loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 9999;
+        }
+
+        .loader {
+            width: 150px;
+            height: 150px;
+            border: 5px solid var(--secondary);
+            border-top: 5px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 20px;
+            background: #eee;
+            border-radius: 10px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .progress {
+            width: 0%;
+            height: 100%;
+            background: var(--primary);
+            animation: progress 3s ease-in-out forwards;
+        }
+
+        /* Animasi */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes progress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        /* Konten Utama */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s ease;
+        }
+
+        .container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h1 {
+            color: var(--primary);
+            text-align: center;
+            margin: 40px 0;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .section {
+            background: #fff;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: scale(1);
+        }
+
+        h2 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 10px;
+        }
+
+        ul {
+            list-style-position: inside;
+            padding-left: 20px;
+        }
+
+        li {
+            margin: 10px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        li::before {
+            content: "•";
+            color: var(--primary);
+            position: absolute;
+            left: 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader-wrapper">
+        <div class="loader"></div>
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Penataan Pemerintahan Awal Kemerdekaan</h1>
+
+        <div class="section">
+            <h2>Pembentukan BKR dan Badan Perjuangan</h2>
+            <ul>
+                <li>BKR dibentuk pada 22 Agustus 1945 dalam sidang PPKI dan diresmikan oleh Presiden Soekarno pada 23 Agustus 1945</li>
+                <li>Para pemuda kecewa dengan pembentukan BKR karena menginginkan tentara nasional langsung, sehingga membentuk badan-badan perjuangan sendiri seperti PPPI di Bandung, AMI di Surabaya, dan BPPI di Padang</li>
+                <li>Arudji Kartawinata diangkat sebagai komandan BKR pertama</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Sistem Pemerintahan</h2>
+            <ul>
+                <li>BP-KNIP yang diketuai Sutan Sjahrir dengan wakil Amir Syarifuddin memiliki kekuasaan legislatif</li>
+                <li>Terjadi perubahan dari sistem presidensial ke sistem parlementer</li>
+                <li>KNI dibentuk PPKI pada 22 Agustus 1945 bersamaan dengan pembentukan BKR dan PNI</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Kondisi dan Pemulihan Ekonomi</h2>
+            <h3>Penyebab Inflasi Tinggi</h3>
+            <ul>
+                <li>Beredarnya tiga jenis mata uang secara tidak terkendali: De Javasche Bank, mata uang Hindia Belanda, dan mata uang Jepang</li>
+                <li>Peredaran mata uang Jepang yang tidak terkendali mencapai 1,6 miliar di Jawa dan 4 miliar di masyarakat</li>
+            </ul>
+
+            <h3>Langkah Mengatasi Masalah Ekonomi</h3>
+            <ul>
+                <li>Pemerintah mengeluarkan Oeang Repoeblik Indonesia (ORI) pada 30 Oktober 1946</li>
+                <li>Penukaran mata uang Jepang dengan ORI dengan nilai 1.000 mata uang Jepang = 1 ORI</li>
+                <li>Pembentukan Bank Negara Indonesia (BNI) pada 5 Juli 1946</li>
+                <li>Pembentukan Banking and Trading Corporation (BTC)</li>
+            </ul>
+
+            <h3>Mengatasi Blokade Ekonomi NICA</h3>
+            <ul>
+                <li>Melakukan hubungan dagang langsung dengan luar negeri</li>
+                <li>Melakukan diplomasi beras dengan India</li>
+                <li>Membentuk Persatuan Tenaga Ekonomi (PTE) untuk menggiatkan partisipasi pengusaha swasta</li>
+                <li>BTC melakukan kesepakatan perdagangan dengan perusahaan Amerika Serikat Isbrantsen Inc</li>
+            </ul>
+
+            <h3>Kebijakan Ekonomi Lanjutan</h3>
+            <ul>
+                <li>Mengadakan Konferensi Ekonomi pertama pada Februari 1946</li>
+                <li>Konferensi Ekonomi kedua pada 6 Mei 1946</li>
+                <li>Membentuk Jawatan Persediaan dan Pembagian Bahan Makanan (PPBM)</li>
+                <li>Pembentukan Perusahaan Perkebunan Negara (PPN)</li>
+                <li>Membentuk Planning Board (Badan Perancang Ekonomi) pada 19 Januari 1947</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.querySelector('.loader-wrapper').style.display = 'none';
+                document.querySelector('.container').classList.add('visible');
+            }, 3000);
+        });
+
+        // Animasi scroll
+        const sections = document.querySelectorAll('.section');
+        
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(50px)';
+            section.style.transition = 'all 0.5s ease-out';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
